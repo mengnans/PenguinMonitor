@@ -7,12 +7,14 @@ class AlarmClockScreen(IScreen):
 
     def __init__(self):
         self.canvas = pygame.display.get_surface()
-        self.font = pygame.font.Font("src\\Font\\Inconsolata.otf", 128);
+        self.font = pygame.font.Font("src\\Font\\Reckoner.ttf", 200)
 
-    def Tick(self):
-        self.canvas.blit(self.font.render("Alarm Clock", True, (128, 128, 128)), (12, 20))
-        self.canvas.blit(self.font.render("Alarm Clock", True, (255, 255, 255)), (10, 18))
+    def OnUpdate(self):
         pass
 
-    def OnKeydown(self):
+    def OnPaint(self):
+        self.canvas.blit(self.font.render("TIME", True, (128, 128, 128)), (22, 20))
+        self.canvas.blit(self.font.render("TIME", True, (255, 255, 0)), (20, 18))
+
+    def OnKeyDown(self):
         pass

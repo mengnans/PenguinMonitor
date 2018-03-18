@@ -1,5 +1,4 @@
 import time
-
 import pygame
 
 
@@ -11,7 +10,7 @@ class FpsDisplayItem:
         self.second = 0
 
         self.canvas = pygame.display.get_surface()
-        self.font = pygame.font.Font("src\\Font\\Inconsolata.otf", 18)
+        self.font = pygame.font.Font("src\\Font\\Reckoner.ttf", 18)
 
     def Tick(self):
         if int(time.time()) == self.second:

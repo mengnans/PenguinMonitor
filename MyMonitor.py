@@ -1,6 +1,6 @@
 import pygame
 
-from GadgetItem import GadgetItem
+from ScreenPack.GadgetItem import GadgetItem
 from Utility.FpsDisplayItem import FpsDisplayItem
 from ScreenPack.AlarmClockPack.AlarmClockScreen import AlarmClockScreen
 from ScreenPack.TimerPack.TimerScreen import TimerScreen
@@ -15,8 +15,6 @@ class MyMonitor:
         self.gameScreenItem = TimerScreen()
         self.fpsItem = FpsDisplayItem()
         self.gadgetItem = GadgetItem()
-
-        self.font = pygame.font.Font("src\\Font\\Inconsolata.otf", 38);
         MyMonitor.__GameLoop(self)
 
     def __GameLoop(self):
@@ -28,7 +26,7 @@ class MyMonitor:
             self.fpsItem.Tick()
 
             self.__GameEvent()
-            self.gameScreenItem.Tick()
+            self.gameScreenItem.OnPaint()
 
             pygame.display.update()
 
@@ -46,3 +44,6 @@ class MyMonitor:
             else:
                 self.gameScreenItem = TimerScreen()
                 self.isAlarm = False
+
+
+_myMonitor = MyMonitor()

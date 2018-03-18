@@ -2,10 +2,15 @@ from abc import abstractmethod
 
 
 class IScreen:
+
     @abstractmethod
-    def Tick(self):
+    def OnUpdate(self):
         pass
 
     @abstractmethod
-    def OnKeydown(self):
+    def OnPaint(self):
+        pass
+
+    @abstractmethod
+    def OnKeyDown(self):
         pass

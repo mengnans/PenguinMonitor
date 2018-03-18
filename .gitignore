@@ -2,6 +2,5 @@
 /.idea/workspace.xml
 /ScreenPack/__pycache__
 /Utility/__pycache__
-/__pycache__/*.pyc
 *.pyc
 /__pycache__
