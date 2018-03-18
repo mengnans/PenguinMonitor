@@ -1,12 +1,13 @@
 import pygame
 
-from ScreenPack.AlarmClockPack.AlarmClockScreen import AlarmClockScreen
 from GadgetItem import GadgetItem
-from ScreenPack.TimerPack import TimerScreen
 from Utility.FpsDisplayItem import FpsDisplayItem
+from ScreenPack.AlarmClockPack.AlarmClockScreen import AlarmClockScreen
+from ScreenPack.TimerPack.TimerScreen import TimerScreen
 
 
 class MyMonitor:
+    isAlarm = False
 
     def __init__(self):
         pygame.init()
@@ -39,5 +40,9 @@ class MyMonitor:
 
         _keyPressed = pygame.key.get_pressed()
         if _keyPressed[pygame.K_TAB]:
-            self.gameScreenItem = AlarmClockScreen()
-            print("000000000000000")
+            if not self.isAlarm:
+                self.gameScreenItem = AlarmClockScreen()
+                self.isAlarm = True
+            else:
+                self.gameScreenItem = TimerScreen()
+                self.isAlarm = False
