@@ -1,8 +1,8 @@
 import pygame
 
-from AlarmClockPack.AlarmClockScreen import AlarmClockScreen
-from EnginePack.GadgetItem import GadgetItem
-from TimerPack.TimerScreen import TimerScreen
+from ScreenPack.AlarmClockPack.AlarmClockScreen import AlarmClockScreen
+from GadgetItem import GadgetItem
+from ScreenPack.TimerPack import TimerScreen
 from Utility.FpsDisplayItem import FpsDisplayItem
 
 
@@ -15,12 +15,12 @@ class MyMonitor:
         self.fpsItem = FpsDisplayItem()
         self.gadgetItem = GadgetItem()
 
-        self.font = pygame.font.SysFont("arial", 38);
+        self.font = pygame.font.Font("src\\Font\\Inconsolata.otf", 38);
         MyMonitor.__GameLoop(self)
 
     def __GameLoop(self):
         while True:
-            pygame.time.Clock().tick(8)
+            pygame.time.Clock().tick(5)
             pygame.display.get_surface().fill((0, 0, 0))
 
             self.gadgetItem.Tick()
@@ -36,8 +36,7 @@ class MyMonitor:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-            if event.type == pygame.K_0:
-                print("000000000000000")
+
         _keyPressed = pygame.key.get_pressed()
         if _keyPressed[pygame.K_TAB]:
             self.gameScreenItem = AlarmClockScreen()

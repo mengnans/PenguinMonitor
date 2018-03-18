@@ -1,3 +1,3 @@
-from EnginePack.MyMonitor import MyMonitor
+from MyMonitor import MyMonitor
 
 _myMonitor = MyMonitor() 
