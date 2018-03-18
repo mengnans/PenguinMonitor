@@ -22,7 +22,7 @@ class MyMonitor:
             pygame.time.Clock().tick(60)
             pygame.display.get_surface().fill((0, 0, 0))
 
-            self.gadgetItem.Tick()
+            self.gadgetItem.OnPaint()
             self.fpsItem.Tick()
 
             self.__GameEvent()
