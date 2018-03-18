@@ -17,5 +17,7 @@ class TimerScreen(IScreen):
         # _textpos = _renderText.get_rect()
         self.canvas.blit(self.font.render(_timeContent, True, (128, 128, 128)), (12, 20))
         self.canvas.blit(self.font.render(_timeContent, True, (255, 255, 255)), (10, 18))
+
+
     def OnKeydown(self):
         pass
