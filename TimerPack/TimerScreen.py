@@ -8,7 +8,8 @@ class TimerScreen(IScreen):
 
     def __init__(self):
         self.canvas = pygame.display.get_surface()
-        self.font = pygame.font.SysFont("arial", 128)
+
+        self.font = pygame.font.Font("src\\Font\\Inconsolata.otf", 128)
 
     def Tick(self):
         _timeContent = time.strftime("%H:%M", time.localtime())
