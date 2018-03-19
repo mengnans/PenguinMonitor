@@ -42,14 +42,15 @@ class TimerScreen(IScreen):
         self.canvas.blit(self.imgPillDark, (264, 184))
 
         self.font = pygame.font.Font("src\\Font\\Reckoner.ttf", 58)
-        _date_today = date.today()
-        _weekdayContent = calendar.day_name[_date_today.weekday()][:3]
-        _renderText = self.font.render(_weekdayContent, True, (255, 255, 255))
-        _recText = _renderText.get_rect()
-        # pygame.draw.rect(self.canvas, (64, 64, 64), (10, 0, _recText[2], _recText[3]), 1)
-        # # self.canvas.draw.text(_timeContent, (0, 0), self.font)
-        self.canvas.blit(self.font.render(_weekdayContent, True, (128, 128, 128)), (7, 186))
-        self.canvas.blit(self.font.render(_weekdayContent, True, (255, 255, 255)), (5, 184))
+        _dateToday = date.today()
+        _bottomContent = calendar.month_name[_dateToday.month]
+
+        _bottomContent += ' ' + calendar.day_name[_dateToday.weekday()]
+        _bottomContent = _bottomContent.upper();
+        # _renderText = self.font.render(_bottomContent, True, (255, 255, 255))
+        # _recText = _renderText.get_rect()
+        self.canvas.blit(self.font.render(_bottomContent, True, (128, 128, 128)), (9, 186))
+        self.canvas.blit(self.font.render(_bottomContent, True, (255, 255, 255)), (7, 184))
 
 
     def OnKeyDown(self):
