@@ -10,6 +10,8 @@ class TimerScreen(IScreen):
     def __init__(self):
         self.canvas = pygame.display.get_surface()
         self.font = pygame.font.Font("src\\Font\\Reckoner.ttf", 200)
+        self.imgPillBright = pygame.image.load('src\\Icon\\PillBright.png')
+        self.imgPillDark = pygame.image.load('src\\Icon\\PillDark.png')
 
     def OnUpdate(self):
         pass
@@ -17,7 +19,7 @@ class TimerScreen(IScreen):
     def OnPaint(self):
         # 这里可以做性能优化，这个优化很重要
         self.__PaintTime()
-        pygame.draw.line(self.canvas, (64, 64, 64), (0, 174), (DataWindow.WindowsSize[0], 174), 1)
+        pygame.draw.line(self.canvas, (64, 64, 64), (0, 175), (DataWindow.WindowsSize[0], 175), 1)
         self.__PaintGadget()
 
     def __PaintTime(self):
@@ -31,8 +33,9 @@ class TimerScreen(IScreen):
         self.canvas.blit(self.font.render(_timeContent, True, (255, 255, 255)), (_locationX, 5))
 
     def __PaintGadget(self):
-        pygame.draw.line(self.canvas, (64, 64, 64), (0, 174), (DataWindow.WindowsSize[0], 240), 1)
-        pygame.draw.line(self.canvas, (64, 64, 64), (0, 240), (DataWindow.WindowsSize[0], 174), 1)
+        # pygame.draw.line(self.canvas, (64, 64, 64), (0, 175), (DataWindow.WindowsSize[0], 240), 1)
+        # pygame.draw.line(self.canvas, (64, 64, 64), (0, 240), (DataWindow.WindowsSize[0], 175), 1)
+        self.canvas.blit(self.imgPillDark, (264, 184))
 
     def OnKeyDown(self):
         pass

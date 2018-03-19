@@ -2,8 +2,8 @@ import pygame
 
 from ScreenPack.GadgetItem import GadgetItem
 from Utility.FpsDisplayItem import FpsDisplayItem
-from ScreenPack.AlarmClockPack.AlarmClockScreen import AlarmClockScreen
-from ScreenPack.TimerPack.TimerScreen import TimerScreen
+from ScreenPack.AlarmClockScreen import AlarmClockScreen
+from ScreenPack.TimerScreen import TimerScreen
 
 
 class MyMonitor:
