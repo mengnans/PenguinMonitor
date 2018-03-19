@@ -7,11 +7,12 @@ from ScreenPack.IScreen import IScreen
 from DataPack.DataWindow import DataWindow
 
 
-class TimerScreen(IScreen):
+class MainScreen(IScreen):
 
     def __init__(self):
         self.canvas = pygame.display.get_surface()
         self.font = pygame.font.Font("src\\Font\\Reckoner.ttf", 200)
+        self.fontSmall = pygame.font.Font("src\\Font\\Reckoner.ttf", 58)
         self.imgPillBright = pygame.image.load('src\\Icon\\PillBright.png')
         self.imgPillDark = pygame.image.load('src\\Icon\\PillDark.png')
 
@@ -19,12 +20,12 @@ class TimerScreen(IScreen):
         pass
 
     def OnPaint(self):
-        # TODO: the code here can be optimized
         self.__PaintTime()
         pygame.draw.line(self.canvas, (64, 64, 64), (0, 175), (DataWindow.WindowsSize[0], 175), 1)
         self.__PaintGadget()
 
     def __PaintTime(self):
+        # TODO: the code here can be optimized
         self.font = pygame.font.Font("src\\Font\\Reckoner.ttf", 200)
         _timeContent = time.strftime("%H:%M", time.localtime())
         _renderText = self.font.render(_timeContent, True, (255, 255, 255))
@@ -37,21 +38,13 @@ class TimerScreen(IScreen):
         self.canvas.blit(self.font.render(_timeContent, True, (255, 255, 255)), (_locationX, 5))
 
     def __PaintGadget(self):
-        # pygame.draw.line(self.canvas, (64, 64, 64), (0, 175), (DataWindow.WindowsSize[0], 240), 1)
-        # pygame.draw.line(self.canvas, (64, 64, 64), (0, 240), (DataWindow.WindowsSize[0], 175), 1)
         self.canvas.blit(self.imgPillDark, (264, 184))
-
-        self.font = pygame.font.Font("src\\Font\\Reckoner.ttf", 58)
         _dateToday = date.today()
         _bottomContent = calendar.month_name[_dateToday.month]
-
         _bottomContent += ' ' + calendar.day_name[_dateToday.weekday()]
-        _bottomContent = _bottomContent.upper();
-        # _renderText = self.font.render(_bottomContent, True, (255, 255, 255))
-        # _recText = _renderText.get_rect()
-        self.canvas.blit(self.font.render(_bottomContent, True, (128, 128, 128)), (9, 186))
-        self.canvas.blit(self.font.render(_bottomContent, True, (255, 255, 255)), (7, 184))
-
+        _bottomContent = _bottomContent.upper()
+        self.canvas.blit(self.fontSmall.render(_bottomContent, True, (128, 128, 128)), (9, 186))
+        self.canvas.blit(self.fontSmall.render(_bottomContent, True, (255, 255, 255)), (7, 184))
 
     def OnKeyDown(self):
         pass

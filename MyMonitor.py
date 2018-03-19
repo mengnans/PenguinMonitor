@@ -1,32 +1,31 @@
 import pygame
 
-from ScreenPack.GadgetItem import GadgetItem
 from Utility.FpsDisplayItem import FpsDisplayItem
 from ScreenPack.AlarmClockScreen import AlarmClockScreen
-from ScreenPack.TimerScreen import TimerScreen
+from ScreenPack.MainScreen import MainScreen
+from Utility.SoundHelper import SoundHelper
 
 
 class MyMonitor:
-    isAlarm = False
+    # TODO 这里要用枚举类型处理当前所在的Screen并做相应的更改
+    __isAlarm = False
+    __myMonitorItem = None
 
     def __init__(self):
+        MyMonitor.__myMonitorItem = self
         pygame.init()
+        SoundHelper.SetInitial()
         self.screen = pygame.display.set_mode((320, 240), 0, 32)
-        self.gameScreenItem = TimerScreen()
+        self.gameScreenItem = MainScreen()
         self.fpsItem = FpsDisplayItem()
-        self.gadgetItem = GadgetItem()
         MyMonitor.__GameLoop(self)
 
     def __GameLoop(self):
         while True:
             pygame.time.Clock().tick(6)
-            pygame.display.get_surface().fill((0, 0, 0))
-
-            self.gadgetItem.OnPaint()
-            self.fpsItem.Tick()
+            self.__GamePaint()
 
             self.__GameEvent()
-            self.gameScreenItem.OnPaint()
 
             pygame.display.update()
 
@@ -38,12 +37,19 @@ class MyMonitor:
 
         _keyPressed = pygame.key.get_pressed()
         if _keyPressed[pygame.K_TAB]:
-            if not self.isAlarm:
+            if not self.__isAlarm:
                 self.gameScreenItem = AlarmClockScreen()
-                self.isAlarm = True
+                self.__isAlarm = True
             else:
-                self.gameScreenItem = TimerScreen()
-                self.isAlarm = False
+                self.gameScreenItem = MainScreen()
+                self.__isAlarm = False
 
+    def __GamePaint(self):
+        pygame.display.get_surface().fill((0, 0, 0))
+        self.gameScreenItem.OnPaint()
+        self.fpsItem.Tick()
+
+    def ForceUpdate():
+        MyMonitor.__myMonitorItem.__GamePaint()
 
 _myMonitor = MyMonitor()
