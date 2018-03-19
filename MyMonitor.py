@@ -19,7 +19,7 @@ class MyMonitor:
 
     def __GameLoop(self):
         while True:
-            pygame.time.Clock().tick(60)
+            pygame.time.Clock().tick(6)
             pygame.display.get_surface().fill((0, 0, 0))
 
             self.gadgetItem.OnPaint()

@@ -13,6 +13,7 @@ class GadgetItem:
         self.imgTemperature = pygame.image.load('src\\Icon\\Temperature.png')
 
     def OnPaint(self):
-        self.canvas.blit(self.imgCpu, (250, 3))
-        _cpuUsage = GetTemperature()
-        self.canvas.blit(self.font.render(_cpuUsage, True, (128, 128, 128)), (260, 0))
+        pass
+        # self.canvas.blit(self.imgCpu, (250, 3))
+        # _cpuUsage = GetTemperature()
+        # self.canvas.blit(self.font.render(_cpuUsage, True, (128, 128, 128)), (260, 0))

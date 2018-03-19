@@ -1,6 +1,8 @@
 import time
 import pygame
 
+from DataPack.DataProgram import DataProgram
+
 
 class FpsDisplayItem:
 
@@ -13,6 +15,8 @@ class FpsDisplayItem:
         self.font = pygame.font.Font("src\\Font\\Inconsolata.otf", 18)
 
     def Tick(self):
+        if DataProgram.IsDebugMode == False:
+            return
         if int(time.time()) == self.second:
             self.fpsTick = self.fpsTick + 1
         else:
