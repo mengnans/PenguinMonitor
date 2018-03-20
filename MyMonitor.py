@@ -3,10 +3,10 @@ import time
 
 from DataPack.DataWindow import DataWindow
 from DataPack.Enum_ScreenType import ScreenType
+from ScreenPack.MainScreen import MainScreen
+from ScreenPack.AlarmClockScreen import AlarmClockScreen
 from ScreenPack.PillReminderScreen import PillReminderScreen
 from Utility.FpsDisplayItem import FpsDisplayItem
-from ScreenPack.AlarmClockScreen import AlarmClockScreen
-from ScreenPack.MainScreen import MainScreen
 from Utility.KeyboardHelper import KeyboardHelper
 from Utility.SoundHelper import SoundHelper
 
