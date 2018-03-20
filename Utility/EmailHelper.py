@@ -1,8 +1,4 @@
-import urllib.request
-import json
 import smtplib
-import time
-import sys
 
 
 class EmailHelper:
