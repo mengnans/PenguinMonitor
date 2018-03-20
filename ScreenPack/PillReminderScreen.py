@@ -9,7 +9,7 @@ class PillReminderScreen(IScreen):
 
     def __init__(self):
         self.__canvas = pygame.display.get_surface()
-        self.__font = pygame.font.Font("src\\Font\\Targa MS.ttf", 64)
+        self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 64)
 
     def OnUpdate(self):
         pass

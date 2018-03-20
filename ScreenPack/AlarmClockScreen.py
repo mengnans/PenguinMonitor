@@ -9,7 +9,7 @@ class AlarmClockScreen(IScreen):
 
     def __init__(self):
         self.__canvas = pygame.display.get_surface()
-        self.__font = pygame.font.Font("src\\Font\\Targa MS.ttf", 200)
+        self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 200)
 
     def OnUpdate(self):
         pass

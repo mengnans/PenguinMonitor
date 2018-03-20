@@ -14,13 +14,13 @@ class MainScreen(IScreen):
 
     def __init__(self):
         self.__canvas = pygame.display.get_surface()
-        self.__font = pygame.font.Font("src\\Font\\Reckoner.ttf", 200)
-        self.__fontSmall = pygame.font.Font("src\\Font\\Reckoner.ttf", 58)
-        self.__imgPillBright = pygame.image.load('src\\Icon\\PillBright.png')
-        self.__imgPillDark = pygame.image.load('src\\Icon\\PillDark.png')
-        self.__imgAlarmClockWarning = pygame.image.load('src\\Icon\\ClockWarning.png')
-        self.__imgAlarmClockBright = pygame.image.load('src\\Icon\\ClockBright.png')
-        self.__imgAlarmClockDark = pygame.image.load('src\\Icon\\ClockDark.png')
+        self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 200)
+        self.__fontSmall = pygame.font.Font("src/Font/Reckoner.ttf", 58)
+        self.__imgPillBright = pygame.image.load('src/Icon/PillBright.png')
+        self.__imgPillDark = pygame.image.load('src/Icon/PillDark.png')
+        self.__imgAlarmClockWarning = pygame.image.load('src/Icon/ClockWarning.png')
+        self.__imgAlarmClockBright = pygame.image.load('src/Icon/ClockBright.png')
+        self.__imgAlarmClockDark = pygame.image.load('src/Icon/ClockDark.png')
 
     def OnUpdate(self):
         pass

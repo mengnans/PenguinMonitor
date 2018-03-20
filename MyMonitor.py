@@ -12,7 +12,6 @@ from Utility.SoundHelper import SoundHelper
 
 
 class MyMonitor:
-
     __myMonitorItem = None
 
     def __init__(self):
@@ -21,6 +20,7 @@ class MyMonitor:
         KeyboardHelper.Update()
         SoundHelper.SetInitial()
         self.__screen = pygame.display.set_mode((320, 240))
+        # self.__screen = pygame.display.set_mode((320, 240), pygame.FULLSCREEN)
         self.__gameScreenItem = MainScreen()
         self.__screenType = ScreenType.MainScreen
         self.__fpsItem = FpsDisplayItem()

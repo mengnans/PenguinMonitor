@@ -15,7 +15,7 @@ class FpsDisplayItem:
         self.__lastUpdateTick = 0
 
         self.__canvas = pygame.display.get_surface()
-        self.__font = pygame.font.Font("src\\Font\\Inconsolata.otf", 18)
+        self.__font = pygame.font.Font("src/Font/Inconsolata.otf", 18)
 
     @OnDebug
     def Tick(self):
