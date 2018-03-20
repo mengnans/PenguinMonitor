@@ -18,9 +18,8 @@ class FpsDisplayItem:
     def Tick(self):
         if DataProgram.IsDebugMode == False:
             return
-        if int(time.time()) == self.__second:
-            self.__fpsTick = self.__fpsTick + 1
-        else:
+        self.__fpsTick = self.__fpsTick + 1
+        if int(time.time()) != self.__second:
             _currentTime = time.time()
             self.__second = int(_currentTime)
             self.__fps = self.__fpsTick / (_currentTime - self.__lastUpdateTick)

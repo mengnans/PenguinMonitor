@@ -27,11 +27,16 @@ class MainScreen(IScreen):
     def __PaintTime(self):
         # TODO: the code here can be optimized
         self.font = pygame.font.Font("src\\Font\\Reckoner.ttf", 200)
-        _timeContent = time.strftime("%H:%M", time.localtime())
+
+        _time = time.localtime()
+        _timeHour = _time.tm_hour
+        _timeMinute = _time.tm_min
+        _timeContent = str(_timeHour) + ":" + str(_timeMinute)
+
         _renderText = self.font.render(_timeContent, True, (255, 255, 255))
         _recText = _renderText.get_rect()
-        # TODO: try to change the name of attribute, it's hard to understand
         _locationX = (DataWindow.WindowsSize[0] - (_recText[2] - 10)) / 2
+        # TODO: try to change the name of attribute, it's hard to understand
         # pygame.draw.rect(self.canvas, (64, 64, 64), (10, 0, _recText[2], _recText[3]), 1)
         # # self.canvas.draw.text(_timeContent, (0, 0), self.font)
         self.canvas.blit(self.font.render(_timeContent, True, (128, 128, 128)), (_locationX + 2, 8))
