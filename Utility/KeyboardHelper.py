@@ -2,13 +2,19 @@ import pygame
 
 
 class KeyboardHelper:
-    __keyPressed = None
+    __keyPro = None
+    __key = None
 
     def Initial():
-        KeyboardHelper.Update()
+        KeyboardHelper.__keyPro = pygame.key.get_pressed()
+        KeyboardHelper.__key = pygame.key.get_pressed()
 
     def Update():
-        KeyboardHelper.__keyPressed = pygame.key.get_pressed()
+        KeyboardHelper.__keyPro = KeyboardHelper.__key
+        KeyboardHelper.__key = pygame.key.get_pressed()
+
+    def IsPressing(argKey):
+        return KeyboardHelper.__key[argKey]
 
     def IsPress(argKey):
-        return __keyPressed[argKey]
+        return KeyboardHelper.__key[argKey] and not KeyboardHelper.__keyPro[argKey]
