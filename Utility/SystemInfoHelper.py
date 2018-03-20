@@ -2,6 +2,7 @@ import os
 
 from DataPack.DataProgram import DataProgram
 
+
 class SystemInfoHelper:
 
     @staticmethod

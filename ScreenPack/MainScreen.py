@@ -46,11 +46,12 @@ class MainScreen(IScreen):
         self.__canvas.blit(self.__font.render(_timeContentHour, True, (255, 255, 255)), (_locationX, 5))
 
         # Draw colon
-        self.__canvas.blit(self.__font.render(":", True, (128, 128, 128)), (154, -18))
         if MainScreen.timeSecond % 2 == 0:
+            self.__canvas.blit(self.__font.render(":", True, (128, 128, 128)), (154, -18))
             self.__canvas.blit(self.__font.render(":", True, (255, 255, 255)), (152, -20))
         else:
-            self.__canvas.blit(self.__font.render(":", True, (255, 255, 0)), (152, -20))
+            self.__canvas.blit(self.__font.render(":", True, (64, 64, 64)), (154, -18))
+            self.__canvas.blit(self.__font.render(":", True, (128, 128, 128)), (152, -20))
 
         # Draw minute value
         _renderText = self.__font.render(_timeContentMinute, True, (255, 255, 255))
