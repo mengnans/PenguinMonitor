@@ -1,5 +1,6 @@
 import pygame
 import time
+import RPi.GPIO as GPIO
 
 from DataPack.DataWindow import DataWindow
 from DataPack.Enum_ScreenType import ScreenType
@@ -12,9 +13,7 @@ from Utility.SoundHelper import SoundHelper
 
 
 class MyMonitor:
-    # TODO 这里要用枚举类型处理当前所在的Screen并做相应的更改
 
-    __isAlarm = False
     __myMonitorItem = None
 
     def __init__(self):
@@ -67,6 +66,7 @@ class MyMonitor:
         self.__gameScreenItem.OnPaint()
         self.__fpsItem.Tick()
 
+    @staticmethod
     def ForceUpdate():
         MyMonitor.__myMonitorItem.__GamePaint()
 

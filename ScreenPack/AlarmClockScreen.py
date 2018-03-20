@@ -4,6 +4,8 @@ from ScreenPack.IScreen import IScreen
 
 
 class AlarmClockScreen(IScreen):
+    isCounting = True
+    isAboutToEnd = True
 
     def __init__(self):
         self.__canvas = pygame.display.get_surface()
