@@ -8,7 +8,7 @@ class SoundHelper:
         pygame.mixer.init()
 
     @staticmethod
-    def PlaySound(argName):
+    def PlaySound(argMusicFileAddress):
         _sound = pygame.mixer.Sound(argName)
         _sound.play()
 

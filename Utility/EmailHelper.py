@@ -1,5 +1,3 @@
-#! python3
-
 import urllib.request
 import json
 import smtplib
