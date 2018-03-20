@@ -5,6 +5,7 @@ from ScreenPack.AlarmClockScreen import AlarmClockScreen
 from ScreenPack.IScreen import IScreen
 from DataPack.DataWindow import DataWindow
 from ScreenPack.PillReminderScreen import PillReminderScreen
+from Utility.SystemInfoHelper import SystemInfoHelper
 
 
 class MainScreen(IScreen):
@@ -76,9 +77,10 @@ class MainScreen(IScreen):
         else:
             self.__canvas.blit(self.__imgAlarmClockDark, (200, 184))
 
-        # _dateToday = date.today()
-        # _bottomContent = calendar.month_name[_dateToday.month]
-        # _bottomContent += ' ' + calendar.day_name[_dateToday.weekday()]
-        # _bottomContent = _bottomContent.upper()
-        # self.__canvas.blit(self.__fontSmall.render(_bottomContent, True, (128, 128, 128)), (9, 186))
-        # self.__canvas.blit(self.__fontSmall.render(_bottomContent, True, (255, 255, 255)), (7, 184))
+        _temperature = SystemInfoHelper.GetTemperature()
+        _temperatureContent = str(_temperature) + "'C"
+        self.__canvas.blit(self.__fontSmall.render(_temperatureContent, True, (64, 64, 64)), (9, 186))
+        if _temperature <= 60:
+            self.__canvas.blit(self.__fontSmall.render(_temperatureContent, True, (192, 192, 192)), (7, 184))
+        else:
+            self.__canvas.blit(self.__fontSmall.render(_temperatureContent, True, (255, 255, 0)), (7, 184))

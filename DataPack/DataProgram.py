@@ -1,2 +1,2 @@
 class DataProgram:
-    IsDebugMode = False
+    IsDebugMode = True
