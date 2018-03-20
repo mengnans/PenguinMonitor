@@ -2,6 +2,7 @@ from abc import abstractmethod
 
 
 class IScreen:
+    isForceUpdate = False
 
     @abstractmethod
     def OnUpdate(self):
@@ -10,3 +11,7 @@ class IScreen:
     @abstractmethod
     def OnPaint(self):
         pass
+
+    @staticmethod
+    def ForceUpdate():
+        IScreen.isForceUpdate = True
