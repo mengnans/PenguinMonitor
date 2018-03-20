@@ -18,3 +18,9 @@ class KeyboardHelper:
 
     def IsPress(argKey):
         return KeyboardHelper.__key[argKey] and not KeyboardHelper.__keyPro[argKey]
+
+    def IsReleaseing(argKey):
+        return not KeyboardHelper.__key[argKey]
+
+    def IsRelease(argKey):
+        return not KeyboardHelper.__key[argKey] and KeyboardHelper.__keyPro[argKey]
