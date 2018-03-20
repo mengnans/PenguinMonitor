@@ -13,8 +13,8 @@ class PillReminderScreen(IScreen):
         pass
 
     def OnPaint(self):
-        self.canvas.blit(self.font.render("TIME", True, (128, 128, 128)), (22, 20))
-        self.canvas.blit(self.font.render("TIME", True, (255, 255, 0)), (20, 18))
+        self.canvas.blit(self.font.render("PILL", True, (128, 128, 128)), (22, 20))
+        self.canvas.blit(self.font.render("PILL", True, (255, 255, 0)), (20, 18))
 
     def OnKeyDown(self):
         pass
