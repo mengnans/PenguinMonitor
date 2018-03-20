@@ -1,0 +1,2 @@
+cd Python/PenguinMonitor
+python3 MyMonitor.py
