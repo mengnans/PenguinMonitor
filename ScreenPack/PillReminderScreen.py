@@ -4,7 +4,8 @@ from ScreenPack.IScreen import IScreen
 
 
 class PillReminderScreen(IScreen):
-    isNotTakenToday = True
+    isColinTaken = True
+    isStoneTaken = True
 
     def __init__(self):
         self.__canvas = pygame.display.get_surface()
@@ -17,5 +18,6 @@ class PillReminderScreen(IScreen):
         self.__canvas.blit(self.__font.render("PILL", True, (128, 128, 128)), (22, 2))
         self.__canvas.blit(self.__font.render("PILL", True, (255, 255, 0)), (20, 0))
 
-    def OnKeyDown(self):
-        pass
+    @staticmethod
+    def IsNotTakenToday():
+        return not PillReminderScreen.isColinTaken or not PillReminderScreen.isStoneTaken

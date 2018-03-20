@@ -1,6 +1,5 @@
 import pygame
 import time
-import RPi.GPIO as GPIO
 
 from DataPack.DataWindow import DataWindow
 from DataPack.Enum_ScreenType import ScreenType

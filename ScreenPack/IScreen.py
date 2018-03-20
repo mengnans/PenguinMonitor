@@ -10,7 +10,3 @@ class IScreen:
     @abstractmethod
     def OnPaint(self):
         pass
-
-    @abstractmethod
-    def OnKeyDown(self):
-        pass

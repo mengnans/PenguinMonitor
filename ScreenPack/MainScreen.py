@@ -38,18 +38,30 @@ class MainScreen(IScreen):
         _timeContentHour = ('%02d' % MainScreen.timeHour)
         _timeContentMinute = ('%02d' % MainScreen.timeMinute)
 
-        _renderText = self.__font.render(_timeContentHour + ":" + _timeContentMinute, True, (255, 255, 255))
+        # Draw hour value
+        _renderText = self.__font.render(_timeContentHour, True, (255, 255, 255))
         _recText = _renderText.get_rect()
-        _locationX = (DataWindow.WindowsSize[0] - (_recText[2] - 10)) / 2
-        # TODO: try to change the name of attribute, it's hard to understand
-        # pygame.draw.rect(self.canvas, (64, 64, 64), (10, 0, _recText[2], _recText[3]), 1)
-        # # self.canvas.draw.text(_timeContent, (0, 0), self.font)
-        self.__canvas.blit(self.__font.render(_timeContentHour + ":" + _timeContentMinute, True, (128, 128, 128)), (_locationX + 2, 8))
-        self.__canvas.blit(self.__font.render(_timeContentHour + ":" + _timeContentMinute, True, (255, 255, 255)), (_locationX, 5))
+        _locationX = (152 - (_recText[2] - 10)) / 2
+        self.__canvas.blit(self.__font.render(_timeContentHour, True, (128, 128, 128)), (_locationX + 2, 7))
+        self.__canvas.blit(self.__font.render(_timeContentHour, True, (255, 255, 255)), (_locationX, 5))
+
+        # Draw colon
+        self.__canvas.blit(self.__font.render(":", True, (128, 128, 128)), (154, -18))
+        if MainScreen.timeSecond % 2 == 0:
+            self.__canvas.blit(self.__font.render(":", True, (255, 255, 255)), (152, -20))
+        else:
+            self.__canvas.blit(self.__font.render(":", True, (255, 255, 0)), (152, -20))
+
+        # Draw minute value
+        _renderText = self.__font.render(_timeContentMinute, True, (255, 255, 255))
+        _recText = _renderText.get_rect()
+        _locationX = 168 + (152 - (_recText[2] - 10)) / 2
+        self.__canvas.blit(self.__font.render(_timeContentMinute, True, (128, 128, 128)), (_locationX + 2, 7))
+        self.__canvas.blit(self.__font.render(_timeContentMinute, True, (255, 255, 255)), (_locationX, 5))
 
     def __PaintGadget(self):
         # Print pill related icon
-        if PillReminderScreen.isNotTakenToday:
+        if PillReminderScreen.IsNotTakenToday():
             self.__canvas.blit(self.__imgPillBright, (264, 184))
         else:
             self.__canvas.blit(self.__imgPillDark, (264, 184))
@@ -69,6 +81,3 @@ class MainScreen(IScreen):
         # _bottomContent = _bottomContent.upper()
         # self.__canvas.blit(self.__fontSmall.render(_bottomContent, True, (128, 128, 128)), (9, 186))
         # self.__canvas.blit(self.__fontSmall.render(_bottomContent, True, (255, 255, 255)), (7, 184))
-
-    def OnKeyDown(self):
-        pass
