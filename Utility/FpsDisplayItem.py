@@ -2,10 +2,12 @@ import time
 import pygame
 
 from DataPack.DataProgram import DataProgram
+from DataPack.Decorator import OnDebug
 
 
 class FpsDisplayItem:
 
+    @OnDebug
     def __init__(self):
         self.__fps = 0
         self.__fpsTick = 0
@@ -15,6 +17,7 @@ class FpsDisplayItem:
         self.__canvas = pygame.display.get_surface()
         self.__font = pygame.font.Font("src\\Font\\Inconsolata.otf", 18)
 
+    @OnDebug
     def Tick(self):
         if DataProgram.IsDebugMode == False:
             return
@@ -26,4 +29,4 @@ class FpsDisplayItem:
             self.__lastUpdateTick = _currentTime
             self.__fpsTick = 0
 
-        self.__canvas.blit(self.__font.render(str(self.__fps), True, (128, 128, 128)), (2, -2))
+        self.__canvas.blit(self.__font.render("%.2f" % self.__fps, True, (128, 128, 128)), (2, -2))

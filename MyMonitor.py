@@ -22,7 +22,7 @@ class MyMonitor:
         pygame.init()
         KeyboardHelper.Update()
         SoundHelper.SetInitial()
-        self.__screen = pygame.display.set_mode((320, 240), 0, 32)
+        self.__screen = pygame.display.set_mode((320, 240))
         self.__gameScreenItem = MainScreen()
         self.__screenType = ScreenType.MainScreen
         self.__fpsItem = FpsDisplayItem()
@@ -43,11 +43,13 @@ class MyMonitor:
         if KeyboardHelper.IsPress(pygame.K_TAB):
             self.__ChangeScreen()
             MyMonitor.ForceUpdate()
+        if KeyboardHelper.IsPress(pygame.K_q):
+            pygame.quit()
+            exit()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 exit()
-
 
     def __ChangeScreen(self):
         if self.__screenType == ScreenType.MainScreen:
