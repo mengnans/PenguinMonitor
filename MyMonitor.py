@@ -21,8 +21,8 @@ class MyMonitor:
         self.__screen = pygame.display.set_mode((320, 240))
         # self.__screen = pygame.display.set_mode((320, 240), pygame.FULLSCREEN)
         # self.__gameScreenItem = MainScreen()
-        self.__gameScreenItem = AlarmClockScreen()
-        # self.__gameScreenItem = PillReminderScreen()
+        # self.__gameScreenItem = AlarmClockScreen()
+        self.__gameScreenItem = PillReminderScreen()
         self.__screenType = ScreenType.MainScreen
         self.__fpsItem = FpsDisplayItem()
         self.__lastTickSecond = 0
@@ -43,7 +43,7 @@ class MyMonitor:
     def __GameEvent(self):
         if KeyboardHelper.IsPress(pygame.K_TAB):
             self.__ChangeScreen()
-            MyMonitor.ForceUpdate()
+            IScreen.ForceUpdate()
         if KeyboardHelper.IsPress(pygame.K_q):
             pygame.quit()
             exit()

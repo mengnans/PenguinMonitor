@@ -5,28 +5,41 @@ from Utility.KeyboardHelper import KeyboardHelper
 
 
 class PillReminderScreen(IScreen):
-    isColinTaken = True
-    isStoneTaken = True
+    isColinTaken = False
+    isStoneTaken = False
 
     def __init__(self):
         self.__canvas = pygame.display.get_surface()
-        self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 64)
-        self.__imgPillBright = pygame.image.load('src/Icon/Pill80Bright.png')
-        self.__imgPillDark = pygame.image.load('src/Icon/Pill80Dark.png')
+        self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 111)
+        self.__imgPillNotTaken = pygame.image.load('src/Icon/Pill_NotTaken.png')
+        self.__imgPillTaken = pygame.image.load('src/Icon/Pill_Taken.png')
 
     def OnUpdate(self):
         if KeyboardHelper.IsPress(pygame.K_c):
             PillReminderScreen.isColinTaken = not PillReminderScreen.isColinTaken
             IScreen.ForceUpdate()
-        pass
+        if KeyboardHelper.IsPress(pygame.K_s):
+            PillReminderScreen.isStoneTaken = not PillReminderScreen.isStoneTaken
+            IScreen.ForceUpdate()
 
     def OnPaint(self):
         if PillReminderScreen.isColinTaken:
-            self.__canvas.blit(self.__imgPillDark, (5, 5))
-            self.__canvas.blit(self.__font.render("Colin", True, (128, 128, 128)), (100, 2))
+            self.__canvas.blit(self.__imgPillTaken, (5, 5))
+            self.__canvas.blit(self.__font.render("Colin", True, (16, 16, 16)), (102, 1))
+            self.__canvas.blit(self.__font.render("Colin", True, (64, 64, 64)), (100, -1))
         else:
-            self.__canvas.blit(self.__imgPillBright, (5, 5))
-            self.__canvas.blit(self.__font.render("Colin", True, (128, 128, 128)), (22, 2))
+            self.__canvas.blit(self.__imgPillNotTaken, (5, 5))
+            self.__canvas.blit(self.__font.render("Colin", True, (128, 128, 128)), (102, 1))
+            self.__canvas.blit(self.__font.render("Colin", True, (255, 255, 255)), (100, -1))
+
+        if PillReminderScreen.isStoneTaken:
+            self.__canvas.blit(self.__imgPillTaken, (5, 105))
+            self.__canvas.blit(self.__font.render("STONE", True, (16, 16, 16)), (102, 101))
+            self.__canvas.blit(self.__font.render("STONE", True, (64, 64, 64)), (100, 99))
+        else:
+            self.__canvas.blit(self.__imgPillNotTaken, (5, 105))
+            self.__canvas.blit(self.__font.render("STONE", True, (128, 128, 128)), (102, 101))
+            self.__canvas.blit(self.__font.render("STONE", True, (255, 255, 255)), (100, 99))
 
         # if PillReminderScreen.isStoneTaken:
         #     self.__canvas.blit(self.__imgPillDark, (5, 95))
