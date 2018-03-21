@@ -13,5 +13,5 @@ class SoundHelper:
         _sound.play()
 
     @staticmethod
-    def PlayAlarmSound():
-        SoundHelper.PlaySound("src/Sound/AlarmMusic9.wav")
+    def PlaySpeech(argSpeechName):
+        SoundHelper.PlaySound("src/Music/Speech_" + argSpeechName + ".wav")

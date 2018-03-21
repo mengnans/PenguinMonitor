@@ -84,7 +84,7 @@ class PillReminderScreen(IScreen):
         __recordFile.flush()
         __recordFile.close()
         if PillReminderScreen.__isColinTaken and PillReminderScreen.__isStoneTaken:
-            SoundHelper.PlaySound("src/Music/Speech_AllMedicineTaken.wav")
+            SoundHelper.PlaySpeech("AllMedicineTaken")
 
     @staticmethod
     def IsNotTakenToday():

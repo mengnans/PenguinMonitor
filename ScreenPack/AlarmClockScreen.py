@@ -26,11 +26,11 @@ class AlarmClockScreen(IScreen):
                 IScreen.ForceUpdate()
         if KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN):
             AlarmClockScreen.__isCounting = True
-            SoundHelper.PlaySound("src/Music/Speech_AlarmClockStarted.wav")
+            SoundHelper.PlaySpeech("AlarmClockStarted")
             IScreen.ForceUpdate()
         if KeyboardHelper.IsPress(pygame.K_ESCAPE):
             if AlarmClockScreen.__isCounting:
-                SoundHelper.PlaySound("src/Music/Speech_AlarmClockStopped.wav")
+                SoundHelper.PlaySpeech("AlarmClockStopped")
                 AlarmClockScreen.__isCounting = False
                 IScreen.ForceUpdate()
             else:
