@@ -51,12 +51,12 @@ class PillReminderScreen(IScreen):
     def OnPaint(self):
         if PillReminderScreen.__isColinTaken:
             self.__canvas.blit(self.__imgPillTaken, (5, 4))
-            self.__canvas.blit(self.__font.render("Colin", True, (16, 16, 16)), (102, 0))
-            self.__canvas.blit(self.__font.render("Colin", True, (64, 64, 64)), (100, -2))
+            self.__canvas.blit(self.__font.render("COLIN", True, (16, 16, 16)), (102, 0))
+            self.__canvas.blit(self.__font.render("COLIN", True, (64, 64, 64)), (100, -2))
         else:
             self.__canvas.blit(self.__imgPillNotTaken, (5, 4))
-            self.__canvas.blit(self.__font.render("Colin", True, (128, 128, 128)), (102, 0))
-            self.__canvas.blit(self.__font.render("Colin", True, (255, 255, 255)), (100, -2))
+            self.__canvas.blit(self.__font.render("COLIN", True, (128, 128, 128)), (102, 0))
+            self.__canvas.blit(self.__font.render("COLIN", True, (255, 255, 255)), (100, -2))
 
         if PillReminderScreen.__isStoneTaken:
             self.__canvas.blit(self.__imgPillTaken, (5, 90))
