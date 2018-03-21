@@ -6,7 +6,7 @@ from Utility.KeyboardHelper import KeyboardHelper
 
 
 class AlarmClockScreen(IScreen):
-    isCounting = False
+    isCounting = True
     isAboutToEnd = False
     timeHour = 0
     timeMinute = 0
