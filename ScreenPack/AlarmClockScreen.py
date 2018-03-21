@@ -11,6 +11,7 @@ class AlarmClockScreen(IScreen):
     timeHour = 0
     timeMinute = 0
     timeSecond = 0
+    alarmTimeString = '0000'
 
     def __init__(self):
         self.__canvas = pygame.display.get_surface()
@@ -18,35 +19,38 @@ class AlarmClockScreen(IScreen):
 
     def OnUpdate(self):
         if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_1):
-            AlarmClockScreen.timeHour += 1
+            AlarmClockScreen.alarmTimeString += '1'
+        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_2):
+            AlarmClockScreen.alarmTimeString += '2'
+        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_3):
+            AlarmClockScreen.alarmTimeString += '3'
+        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_4):
+            AlarmClockScreen.alarmTimeString += '4'
+        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_5):
+            AlarmClockScreen.alarmTimeString += '5'
+        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_6):
+            AlarmClockScreen.alarmTimeString += '6'
+        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_7):
+            AlarmClockScreen.alarmTimeString += '7'
+        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_8):
+            AlarmClockScreen.alarmTimeString += '8'
+        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_9):
+            AlarmClockScreen.alarmTimeString += '9'
+            AlarmClockScreen.alarmTimeString = AlarmClockScreen.alarmTimeString[1:]
             IScreen.ForceUpdate()
-        if KeyboardHelper.IsPress(pygame.K_KP2) | KeyboardHelper.IsPress(pygame.K_2):
-            AlarmClockScreen.timeMinute += 10
-            if AlarmClockScreen.timeMinute > 60:
-                AlarmClockScreen.timeHour += 1
-                AlarmClockScreen.timeMinute -= 60
+        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_0):
+            AlarmClockScreen.alarmTimeString += '0'
+            AlarmClockScreen.alarmTimeString = AlarmClockScreen.alarmTimeString[1:]
             IScreen.ForceUpdate()
-        if KeyboardHelper.IsPress(pygame.K_KP3) | KeyboardHelper.IsPress(pygame.K_3):
-            AlarmClockScreen.timeMinute += 1
-            if AlarmClockScreen.timeMinute > 60:
-                AlarmClockScreen.timeHour += 1
-                AlarmClockScreen.timeMinute -= 60
-            IScreen.ForceUpdate()
-        if KeyboardHelper.IsPress(pygame.K_ESCAPE):
-            AlarmClockScreen.timeHour = 0
-            AlarmClockScreen.timeMinute = 0
-            AlarmClockScreen.timeSecond = 0
-            AlarmClockScreen.isCounting = False
-        if KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN):
-            AlarmClockScreen.isCounting = True
+
         pass
 
     def OnPaint(self):
         self.__PaintTime()
 
     def __PaintTime(self):
-        _timeContentHour = ('%02d' % AlarmClockScreen.timeHour)
-        _timeContentMinute = ('%02d' % AlarmClockScreen.timeMinute)
+        _timeContentHour = AlarmClockScreen.alarmTimeString[:2]
+        _timeContentMinute = AlarmClockScreen.alarmTimeString[2:]
 
         # Draw hour value
         _renderText = self.__font.render(_timeContentHour, True, (255, 255, 255))
