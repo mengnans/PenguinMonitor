@@ -38,8 +38,8 @@ class BottomGadgetsItem:
         # Print alarm clock related icon
         if CourtScreen.screenType == ScreenType.AlarmClock:
             self.__canvas.blit(self.__imgAlarmClockHalo, (200 - 8, 184 - 8))
-        if AlarmClockScreen.isCounting:
-            if AlarmClockScreen.isAboutToEnd and MainScreen.timeSecond % 2 == 0:
+        if AlarmClockScreen.IsCounting():
+            if AlarmClockScreen.IsAboutToEnd() and MainScreen.timeSecond % 2 == 0:
                 self.__canvas.blit(self.__imgAlarmClockWarning, (200, 184))
             else:
                 self.__canvas.blit(self.__imgAlarmClockWorking, (200, 184))

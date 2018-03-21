@@ -20,6 +20,9 @@ class MyMonitor:
         pygame.init()
         KeyboardHelper.Update()
         SoundHelper.SetInitial()
+
+        PillReminderScreen.InitDataInfo()
+
         self.__screen = pygame.display.set_mode((320, 240))
         # self.__screen = pygame.display.set_mode((320, 240), pygame.FULLSCREEN)
         CourtScreen.screenItem = MainScreen()

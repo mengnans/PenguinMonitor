@@ -6,8 +6,8 @@ from Utility.KeyboardHelper import KeyboardHelper
 
 
 class AlarmClockScreen(IScreen):
-    isCounting = False
-    isAboutToEnd = False
+    __isCounting = False
+    __isAboutToEnd = False
     __timeHour = 0
     __timeMinute = 0
     __timeSecond = 0
@@ -24,18 +24,24 @@ class AlarmClockScreen(IScreen):
                 AlarmClockScreen.__alarmTimeString = AlarmClockScreen.__alarmTimeString[1:]
                 IScreen.ForceUpdate()
         if KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN):
-            AlarmClockScreen.isCounting = True
+            AlarmClockScreen.__isCounting = True
+            IScreen.ForceUpdate()
         if KeyboardHelper.IsPress(pygame.K_ESCAPE):
-            if AlarmClockScreen.isCounting:
-                AlarmClockScreen.isCounting = False
+            if AlarmClockScreen.__isCounting:
+                AlarmClockScreen.__isCounting = False
+                IScreen.ForceUpdate()
             else:
                 AlarmClockScreen.__alarmTimeString = '0000'
                 IScreen.ForceUpdate()
 
     def OnPaint(self):
-        self.__PaintTime()
+        if AlarmClockScreen.__isCounting == False:
+            self.__PaintTimeSelecting()
+        else:
+            self.__PaintTimeCounting()
 
-    def __PaintTime(self):
+    # Handle the display of "Selecting time"
+    def __PaintTimeSelecting(self):
         _timeContentHour = AlarmClockScreen.__alarmTimeString[:2]
         _timeContentMinute = AlarmClockScreen.__alarmTimeString[2:]
 
@@ -60,3 +66,15 @@ class AlarmClockScreen(IScreen):
         _locationX = 168 + (152 - (_recText[2] - 10)) / 2
         self.__canvas.blit(self.__font.render(_timeContentMinute, True, (128, 128, 128)), (_locationX + 2, 7))
         self.__canvas.blit(self.__font.render(_timeContentMinute, True, (255, 255, 0)), (_locationX, 5))
+
+    # Handle the display of "Counting down"
+    def __PaintTimeCounting(self):
+        pass
+
+    @staticmethod
+    def IsCounting():
+        return AlarmClockScreen.__isCounting
+
+    @staticmethod
+    def IsAboutToEnd():
+        return AlarmClockScreen.__isAboutToEnd
