@@ -60,7 +60,7 @@ class AlarmClockScreen(IScreen):
         if AlarmClockScreen.__isCounting is False:
             _leftContent = self.__alarmTimeString[:2]
             _rightContent = self.__alarmTimeString[2:]
-            self.__PaintTime(_leftContent, _rightContent)
+            self.__PaintTime(_leftContent, _rightContent, (255, 255, 0))
         else:
             _time = time.localtime()
             _timeHourDiff = AlarmClockScreen.__timeHour - _time.tm_hour
@@ -76,46 +76,47 @@ class AlarmClockScreen(IScreen):
                 self.__alarmTimeString = '0000'
                 _leftContent = self.__alarmTimeString[:2]
                 _rightContent = self.__alarmTimeString[2:]
+                self.__PaintTime(str(_leftContent), str(_rightContent), (255, 255, 0))
             else:
                 if _timeSecondDiff >= 3600:
                     _leftContent = int(_timeSecondDiff / 3600)
                     _timeSecondDiff %= 3600
                     _rightContent = int(_timeSecondDiff / 60)
+                    self.__PaintTime(str(_leftContent), str(_rightContent), (255, 255, 0))
                 else:
                     _leftContent = int(_timeSecondDiff / 60)
                     _rightContent = _timeSecondDiff % 60
                     if _timeSecondDiff <= 60 and AlarmClockScreen.__isAboutToEnd is False:
                         AlarmClockScreen.__isAboutToEnd = True
                         SoundHelper.PlaySpeech("AlarmClockIsAboutToEnd")
+                    self.__PaintTime(str(_leftContent), str(_rightContent), (255, 165, 165))
 
-            self.__PaintTime(str(_leftContent), str(_rightContent))
-
-    def __PaintTime(self, _leftContent, _rightContent):
-        if len(_leftContent) == 1:
-            _leftContent = '0' + _leftContent
-        if len(_rightContent) == 1:
-            _rightContent = '0' + _rightContent
+    def __PaintTime(self, argLeftContent, argRightContent, argRightContentColor):
+        if len(argLeftContent) == 1:
+            argLeftContent = '0' + argLeftContent
+        if len(argRightContent) == 1:
+            argRightContent = '0' + argRightContent
         # Draw hour value
-        _renderText = self.__font.render(_leftContent, True, (255, 255, 255))
+        _renderText = self.__font.render(argLeftContent, True, (255, 255, 255))
         _recText = _renderText.get_rect()
         _locationX = (152 - (_recText[2] - 10)) / 2
-        self.__canvas.blit(self.__font.render(_leftContent, True, (128, 128, 128)), (_locationX + 2, 7))
-        self.__canvas.blit(self.__font.render(_leftContent, True, (255, 255, 0)), (_locationX, 5))
+        self.__canvas.blit(self.__font.render(argLeftContent, True, (128, 128, 128)), (_locationX + 2, 7))
+        self.__canvas.blit(self.__font.render(argLeftContent, True, (255, 255, 0)), (_locationX, 5))
 
         # Draw colon
         if AlarmClockScreen.__timeSecond % 2 == 0:
             self.__canvas.blit(self.__font.render(":", True, (128, 128, 128)), (154, -18))
-            self.__canvas.blit(self.__font.render(":", True, (255, 255, 0)), (152, -20))
+            self.__canvas.blit(self.__font.render(":", True, (255, 255, 255)), (152, -20))
         else:
             self.__canvas.blit(self.__font.render(":", True, (64, 64, 64)), (154, -18))
             self.__canvas.blit(self.__font.render(":", True, (128, 128, 128)), (152, -20))
 
         # Draw minute value
-        _renderText = self.__font.render(_rightContent, True, (255, 255, 255))
+        _renderText = self.__font.render(argRightContent, True, (255, 255, 255))
         _recText = _renderText.get_rect()
         _locationX = 168 + (152 - (_recText[2] - 10)) / 2
-        self.__canvas.blit(self.__font.render(_rightContent, True, (128, 128, 128)), (_locationX + 2, 7))
-        self.__canvas.blit(self.__font.render(_rightContent, True, (255, 255, 0)), (_locationX, 5))
+        self.__canvas.blit(self.__font.render(argRightContent, True, (128, 128, 128)), (_locationX + 2, 7))
+        self.__canvas.blit(self.__font.render(argRightContent, True, argRightContentColor), (_locationX, 5))
 
     @staticmethod
     def IsCounting():
