@@ -1,11 +1,12 @@
 import pygame
 import time
 
+from DataPack.CourtScreen import CourtScreen
 from DataPack.DataWindow import DataWindow
 from DataPack.Enum_ScreenType import ScreenType
 from ScreenPack.BottomGadgetsItem import BottomGadgetsItem
 from ScreenPack.IScreen import IScreen
-from ScreenPack.MainScreen import MainScreen
+from ScreenPack.TimeScreen import MainScreen
 from ScreenPack.AlarmClockScreen import AlarmClockScreen
 from ScreenPack.PillReminderScreen import PillReminderScreen
 from Utility.FpsDisplayItem import FpsDisplayItem
@@ -23,9 +24,9 @@ class MyMonitor:
         # self.__screen = pygame.display.set_mode((320, 240), pygame.FULLSCREEN)
         # self.__gameScreenItem = MainScreen()
         # self.__gameScreenItem = AlarmClockScreen()
-        self.__gameScreenItem = PillReminderScreen()
-        self.__screenType = ScreenType.MainScreen
-        self.__bottomGadget = BottomGadgetsItem()
+        CourtScreen.screenItem = PillReminderScreen()
+        CourtScreen.screenType = ScreenType.MainScreen
+        CourtScreen.bottomGadget = BottomGadgetsItem()
         self.__fpsItem = FpsDisplayItem()
         self.__lastTickSecond = 0
         MyMonitor.__GameLoop(self)
@@ -35,17 +36,16 @@ class MyMonitor:
             pygame.time.Clock().tick(DataWindow.UpdatePerSecond)
             KeyboardHelper.Update()
             self.__GameEvent()
-            self.__gameScreenItem.OnUpdate()
+            CourtScreen.screenItem.OnUpdate()
             if IScreen.isForceUpdate or int(time.time()) != self.__lastTickSecond:
                 IScreen.isForceUpdate = False
                 self.__lastTickSecond = int(time.time())
                 self.__GamePaint()
-                self.__bottomGadget.OnPaint()
             pygame.display.update()
 
     def __GameEvent(self):
         if KeyboardHelper.IsPress(pygame.K_TAB):
-            self.__ChangeScreen()
+            MyMonitor.__ChangeScreen()
             IScreen.ForceUpdate()
         if KeyboardHelper.IsPress(pygame.K_q):
             pygame.quit()
@@ -55,20 +55,22 @@ class MyMonitor:
                 pygame.quit()
                 exit()
 
-    def __ChangeScreen(self):
-        if self.__screenType == ScreenType.MainScreen:
-            self.__screenType = ScreenType.AlarmClock
-            self.__gameScreenItem = AlarmClockScreen()
-        elif self.__screenType == ScreenType.AlarmClock:
-            self.__screenType = ScreenType.PillReminder
-            self.__gameScreenItem = PillReminderScreen()
-        elif self.__screenType == ScreenType.PillReminder:
-            self.__screenType = ScreenType.MainScreen
-            self.__gameScreenItem = MainScreen()
+    @staticmethod
+    def __ChangeScreen():
+        if CourtScreen.screenType == ScreenType.MainScreen:
+            CourtScreen.screenType = ScreenType.AlarmClock
+            CourtScreen.screenItem = AlarmClockScreen()
+        elif CourtScreen.screenType == ScreenType.AlarmClock:
+            CourtScreen.screenType = ScreenType.PillReminder
+            CourtScreen.screenItem = PillReminderScreen()
+        elif CourtScreen.screenType == ScreenType.PillReminder:
+            CourtScreen.screenType = ScreenType.MainScreen
+            CourtScreen.screenItem = MainScreen()
 
     def __GamePaint(self):
         pygame.display.get_surface().fill((0, 0, 0))
-        self.__gameScreenItem.OnPaint()
+        CourtScreen.screenItem.OnPaint()
+        CourtScreen.bottomGadget.OnPaint()
         self.__fpsItem.Tick()
 
 
