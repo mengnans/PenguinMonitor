@@ -1,6 +1,5 @@
 import pygame
 
-from DataPack.DataWindow import DataWindow
 from ScreenPack.IScreen import IScreen
 from Utility.KeyboardHelper import KeyboardHelper
 
@@ -41,8 +40,6 @@ class PillReminderScreen(IScreen):
             self.__canvas.blit(self.__imgPillNotTaken, (5, 90))
             self.__canvas.blit(self.__font.render("STONE", True, (128, 128, 128)), (102, 86))
             self.__canvas.blit(self.__font.render("STONE", True, (255, 255, 255)), (100, 84))
-
-        pygame.draw.line(self.__canvas, (64, 64, 64), (0, 175), (DataWindow.WindowsSize[0], 175), 1)
 
     @staticmethod
     def IsNotTakenToday():

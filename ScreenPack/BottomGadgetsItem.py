@@ -2,7 +2,7 @@ import pygame
 
 from ScreenPack.AlarmClockScreen import AlarmClockScreen
 from DataPack.DataWindow import DataWindow
-from ScreenPack.MainScreen import MainScreen
+from ScreenPack.TimeScreen import MainScreen
 from ScreenPack.PillReminderScreen import PillReminderScreen
 from Utility.SystemInfoHelper import SystemInfoHelper
 
