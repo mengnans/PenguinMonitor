@@ -28,10 +28,9 @@ class AlarmClockScreen(IScreen):
         if KeyboardHelper.IsPress(pygame.K_ESCAPE):
             if AlarmClockScreen.isCounting:
                 AlarmClockScreen.isCounting = False
-            else
+            else:
                 AlarmClockScreen.__alarmTimeString = '0000'
                 IScreen.ForceUpdate()
-
 
     def OnPaint(self):
         self.__PaintTime()

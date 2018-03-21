@@ -20,19 +20,20 @@ class BottomGadgetsItem:
         self.__imgAlarmClockWarning = pygame.image.load('src/Icon/Bottom_ClockWarning.png')
         self.__imgAlarmClockWorking = pygame.image.load('src/Icon/Bottom_ClockWorking.png')
 
-        self.__imgPillNotTaken = pygame.image.load('src/Icon/Bottom_PillNotTaken.png')
         self.__imgPill = pygame.image.load('src/Icon/Bottom_Pill.png')
+        self.__imgPillHalo = pygame.image.load('src/Icon/Bottom_PillHalo.png')
+        self.__imgPillNotTaken = pygame.image.load('src/Icon/Bottom_PillNotTaken.png')
 
     def OnPaint(self):
         pygame.draw.line(self.__canvas, (64, 64, 64), (0, 175), (DataWindow.WindowsSize[0], 175), 1)
 
-        # # Print pill related icon
-        # if CourtScreen.screenType == ScreenType.PillReminder:
-        #     pygame.draw.line(self.__canvas, (64, 64, 64), (264, 184), (264 + 48, 184 + 48), 10)
-        # if PillReminderScreen.IsNotTakenToday():
-        #     self.__canvas.blit(self.__imgPillBright, (264, 184))
-        # else:
-        #     self.__canvas.blit(self.__imgPillDark, (264, 184))
+        # Print pill related icon
+        if CourtScreen.screenType == ScreenType.PillReminder:
+            self.__canvas.blit(self.__imgPillHalo, (264 - 8, 184 - 8))
+        if PillReminderScreen.IsNotTakenToday():
+            self.__canvas.blit(self.__imgPillNotTaken, (264, 184))
+        else:
+            self.__canvas.blit(self.__imgPill, (264, 184))
 
         # Print alarm clock related icon
         if CourtScreen.screenType == ScreenType.AlarmClock:
