@@ -3,6 +3,7 @@ import time
 
 from ScreenPack.IScreen import IScreen
 from Utility.KeyboardHelper import KeyboardHelper
+from Utility.SoundHelper import SoundHelper
 
 
 class AlarmClockScreen(IScreen):
@@ -25,9 +26,11 @@ class AlarmClockScreen(IScreen):
                 IScreen.ForceUpdate()
         if KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN):
             AlarmClockScreen.__isCounting = True
+            SoundHelper.PlaySound("src/Music/Speech_AlarmClockStarted.wav")
             IScreen.ForceUpdate()
         if KeyboardHelper.IsPress(pygame.K_ESCAPE):
             if AlarmClockScreen.__isCounting:
+                SoundHelper.PlaySound("src/Music/Speech_AlarmClockStopped.wav")
                 AlarmClockScreen.__isCounting = False
                 IScreen.ForceUpdate()
             else:

@@ -3,11 +3,14 @@ import time
 
 from ScreenPack.IScreen import IScreen
 from Utility.KeyboardHelper import KeyboardHelper
+from Utility.SoundHelper import SoundHelper
 
 
 class PillReminderScreen(IScreen):
     __isColinTaken = False
     __isStoneTaken = False
+
+    __dataFileName = "pillData.txt"
 
     def __init__(self):
         self.__canvas = pygame.display.get_surface()
@@ -21,11 +24,10 @@ class PillReminderScreen(IScreen):
         try:
             PillReminderScreen.__isColinTaken = False
             PillReminderScreen.__isStoneTaken = False
-            _readFile = open("pillData.txt", "r")
+            _readFile = open(PillReminderScreen.__dataFileName, "r")
             _rawContent = _readFile.read()
 
             _time = time.localtime()
-            print(_rawContent[0:4])
             if _rawContent[0:4] == '%02d' % _time.tm_mon + '%02d' % _time.tm_mday:
                 if _rawContent[5:6] == "C":
                     PillReminderScreen.__isColinTaken = True
@@ -66,7 +68,7 @@ class PillReminderScreen(IScreen):
             self.__canvas.blit(self.__font.render("STONE", True, (255, 255, 255)), (100, 84))
 
     def WriteToFile(self):
-        __recordFile = open("pillData.txt", "w")
+        __recordFile = open(PillReminderScreen.__dataFileName, "w")
 
         _time = time.localtime()
         _content = '%02d' % _time.tm_mon + '%02d' % _time.tm_mday + " "
@@ -81,6 +83,8 @@ class PillReminderScreen(IScreen):
         __recordFile.write(_content)
         __recordFile.flush()
         __recordFile.close()
+        if PillReminderScreen.__isColinTaken and PillReminderScreen.__isStoneTaken:
+            SoundHelper.PlaySound("src/Music/Speech_AllMedicineTaken.wav")
 
     @staticmethod
     def IsNotTakenToday():
