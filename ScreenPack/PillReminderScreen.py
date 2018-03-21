@@ -5,8 +5,8 @@ from Utility.KeyboardHelper import KeyboardHelper
 
 
 class PillReminderScreen(IScreen):
-    isColinTaken = False
-    isStoneTaken = False
+    __isColinTaken = False
+    __isStoneTaken = False
 
     def __init__(self):
         self.__canvas = pygame.display.get_surface()
@@ -16,14 +16,14 @@ class PillReminderScreen(IScreen):
 
     def OnUpdate(self):
         if KeyboardHelper.IsPress(pygame.K_c):
-            PillReminderScreen.isColinTaken = not PillReminderScreen.isColinTaken
+            PillReminderScreen.__isColinTaken = not PillReminderScreen.__isColinTaken
             IScreen.ForceUpdate()
         if KeyboardHelper.IsPress(pygame.K_s):
-            PillReminderScreen.isStoneTaken = not PillReminderScreen.isStoneTaken
+            PillReminderScreen.__isStoneTaken = not PillReminderScreen.__isStoneTaken
             IScreen.ForceUpdate()
 
     def OnPaint(self):
-        if PillReminderScreen.isColinTaken:
+        if PillReminderScreen.__isColinTaken:
             self.__canvas.blit(self.__imgPillTaken, (5, 4))
             self.__canvas.blit(self.__font.render("Colin", True, (16, 16, 16)), (102, 0))
             self.__canvas.blit(self.__font.render("Colin", True, (64, 64, 64)), (100, -2))
@@ -32,7 +32,7 @@ class PillReminderScreen(IScreen):
             self.__canvas.blit(self.__font.render("Colin", True, (128, 128, 128)), (102, 0))
             self.__canvas.blit(self.__font.render("Colin", True, (255, 255, 255)), (100, -2))
 
-        if PillReminderScreen.isStoneTaken:
+        if PillReminderScreen.__isStoneTaken:
             self.__canvas.blit(self.__imgPillTaken, (5, 90))
             self.__canvas.blit(self.__font.render("STONE", True, (16, 16, 16)), (102, 86))
             self.__canvas.blit(self.__font.render("STONE", True, (64, 64, 64)), (100, 84))
@@ -43,4 +43,4 @@ class PillReminderScreen(IScreen):
 
     @staticmethod
     def IsNotTakenToday():
-        return not PillReminderScreen.isColinTaken or not PillReminderScreen.isStoneTaken
+        return not PillReminderScreen.__isColinTaken or not PillReminderScreen.__isStoneTaken
