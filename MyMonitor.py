@@ -22,9 +22,9 @@ class MyMonitor:
         SoundHelper.SetInitial()
         self.__screen = pygame.display.set_mode((320, 240))
         # self.__screen = pygame.display.set_mode((320, 240), pygame.FULLSCREEN)
-        # self.__gameScreenItem = MainScreen()
-        # self.__gameScreenItem = AlarmClockScreen()
-        CourtScreen.screenItem = PillReminderScreen()
+        CourtScreen.screenItem = MainScreen()
+        # CourtScreen.screenItem = AlarmClockScreen()
+        # CourtScreen.screenItem = PillReminderScreen()
         CourtScreen.screenType = ScreenType.MainScreen
         CourtScreen.bottomGadget = BottomGadgetsItem()
         self.__fpsItem = FpsDisplayItem()
