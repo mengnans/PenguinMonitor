@@ -1,0 +1,10 @@
+A piece of music is required when:
+    1. We haven't take the medicine
+    2. It's 21:00
+Colin will compose a piece of music of (around) 15 second
+
+Create a "Weather" panel to display:
+    Current weather (temperature/weather/humid)
+    Weather in the next 3 days
+
+Warning when the temperature of raspberry is over 60'C by making a noise
