@@ -1,5 +1,7 @@
 import pygame
 
+from DataPack.CourtScreen import CourtScreen
+from DataPack.Enum_ScreenType import ScreenType
 from ScreenPack.AlarmClockScreen import AlarmClockScreen
 from DataPack.DataWindow import DataWindow
 from ScreenPack.TimeScreen import MainScreen
@@ -20,16 +22,18 @@ class BottomGadgetsItem:
 
     def OnPaint(self):
         pygame.draw.line(self.__canvas, (64, 64, 64), (0, 175), (DataWindow.WindowsSize[0], 175), 1)
-        self.__PaintGadget()
 
-    def __PaintGadget(self):
         # Print pill related icon
+        if CourtScreen.screenType == ScreenType.PillReminder:
+            pygame.draw.line(self.__canvas, (64, 64, 64), (264, 184), (264 + 48, 184 + 48), 10)
         if PillReminderScreen.IsNotTakenToday():
             self.__canvas.blit(self.__imgPillBright, (264, 184))
         else:
             self.__canvas.blit(self.__imgPillDark, (264, 184))
 
         # Print alarm clock related icon
+        if CourtScreen.screenType == ScreenType.AlarmClock:
+            pygame.draw.line(self.__canvas, (64, 64, 64), (200, 184), (200 + 48, 184 + 48), 10)
         if AlarmClockScreen.isCounting:
             if AlarmClockScreen.isAboutToEnd and MainScreen.timeSecond % 2 == 0:
                 self.__canvas.blit(self.__imgAlarmClockWarning, (200, 184))
