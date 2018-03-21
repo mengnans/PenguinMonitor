@@ -3,6 +3,7 @@ import time
 
 from DataPack.DataWindow import DataWindow
 from DataPack.Enum_ScreenType import ScreenType
+from ScreenPack.BottomGadgetsItem import BottomGadgetsItem
 from ScreenPack.IScreen import IScreen
 from ScreenPack.MainScreen import MainScreen
 from ScreenPack.AlarmClockScreen import AlarmClockScreen
@@ -24,6 +25,7 @@ class MyMonitor:
         # self.__gameScreenItem = AlarmClockScreen()
         self.__gameScreenItem = PillReminderScreen()
         self.__screenType = ScreenType.MainScreen
+        self.__bottomGadget = BottomGadgetsItem()
         self.__fpsItem = FpsDisplayItem()
         self.__lastTickSecond = 0
         MyMonitor.__GameLoop(self)
@@ -38,6 +40,7 @@ class MyMonitor:
                 IScreen.isForceUpdate = False
                 self.__lastTickSecond = int(time.time())
                 self.__GamePaint()
+                self.__bottomGadget.OnPaint()
             pygame.display.update()
 
     def __GameEvent(self):
