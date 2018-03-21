@@ -44,12 +44,12 @@ class AlarmClockScreen(IScreen):
         _recText = _renderText.get_rect()
         _locationX = (152 - (_recText[2] - 10)) / 2
         self.__canvas.blit(self.__font.render(_timeContentHour, True, (128, 128, 128)), (_locationX + 2, 7))
-        self.__canvas.blit(self.__font.render(_timeContentHour, True, (255, 255, 255)), (_locationX, 5))
+        self.__canvas.blit(self.__font.render(_timeContentHour, True, (255, 255, 0)), (_locationX, 5))
 
         # Draw colon
         if AlarmClockScreen.__timeSecond % 2 == 0:
             self.__canvas.blit(self.__font.render(":", True, (128, 128, 128)), (154, -18))
-            self.__canvas.blit(self.__font.render(":", True, (255, 255, 255)), (152, -20))
+            self.__canvas.blit(self.__font.render(":", True, (255, 255, 0)), (152, -20))
         else:
             self.__canvas.blit(self.__font.render(":", True, (64, 64, 64)), (154, -18))
             self.__canvas.blit(self.__font.render(":", True, (128, 128, 128)), (152, -20))
@@ -59,4 +59,4 @@ class AlarmClockScreen(IScreen):
         _recText = _renderText.get_rect()
         _locationX = 168 + (152 - (_recText[2] - 10)) / 2
         self.__canvas.blit(self.__font.render(_timeContentMinute, True, (128, 128, 128)), (_locationX + 2, 7))
-        self.__canvas.blit(self.__font.render(_timeContentMinute, True, (255, 255, 255)), (_locationX, 5))
+        self.__canvas.blit(self.__font.render(_timeContentMinute, True, (255, 255, 0)), (_locationX, 5))
