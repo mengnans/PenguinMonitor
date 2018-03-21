@@ -18,30 +18,34 @@ class AlarmClockScreen(IScreen):
         self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 200)
 
     def OnUpdate(self):
-        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_1):
-            AlarmClockScreen.alarmTimeString += '1'
-        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_2):
-            AlarmClockScreen.alarmTimeString += '2'
-        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_3):
-            AlarmClockScreen.alarmTimeString += '3'
-        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_4):
-            AlarmClockScreen.alarmTimeString += '4'
-        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_5):
-            AlarmClockScreen.alarmTimeString += '5'
-        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_6):
-            AlarmClockScreen.alarmTimeString += '6'
-        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_7):
-            AlarmClockScreen.alarmTimeString += '7'
-        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_8):
-            AlarmClockScreen.alarmTimeString += '8'
-        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_9):
-            AlarmClockScreen.alarmTimeString += '9'
-            AlarmClockScreen.alarmTimeString = AlarmClockScreen.alarmTimeString[1:]
-            IScreen.ForceUpdate()
-        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_0):
-            AlarmClockScreen.alarmTimeString += '0'
-            AlarmClockScreen.alarmTimeString = AlarmClockScreen.alarmTimeString[1:]
-            IScreen.ForceUpdate()
+        for _num in range(0, 10):
+            if KeyboardHelper.IsPress(pygame.K_KP0 + _num) | KeyboardHelper.IsPress(pygame.K_0 + _num):
+                AlarmClockScreen.alarmTimeString += str(_num)
+                AlarmClockScreen.alarmTimeString = AlarmClockScreen.alarmTimeString[1:]
+                IScreen.ForceUpdate()
+        # if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_1):
+        #     AlarmClockScreen.alarmTimeString += '1'
+        # if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_2):
+        #     AlarmClockScreen.alarmTimeString += '2'
+        # if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_3):
+        #     AlarmClockScreen.alarmTimeString += '3'
+        # if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_4):
+        #     AlarmClockScreen.alarmTimeString += '4'
+        # if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_5):
+        #     AlarmClockScreen.alarmTimeString += '5'
+        # if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_6):
+        #     AlarmClockScreen.alarmTimeString += '6'
+        # if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_7):
+        #     AlarmClockScreen.alarmTimeString += '7'
+        # if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_8):
+        #     AlarmClockScreen.alarmTimeString += '8'
+        # if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_9):
+        #     AlarmClockScreen.alarmTimeString += '9'
+        #     AlarmClockScreen.alarmTimeString = AlarmClockScreen.alarmTimeString[1:]
+        #     IScreen.ForceUpdate()
+        # if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_0):
+        #     AlarmClockScreen.alarmTimeString += '0'
+
 
         pass
 
