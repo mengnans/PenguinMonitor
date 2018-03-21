@@ -17,16 +17,16 @@ class AlarmClockScreen(IScreen):
         self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 200)
 
     def OnUpdate(self):
-        if KeyboardHelper.IsPress(pygame.K_1):
+        if KeyboardHelper.IsPress(pygame.K_KP1) | KeyboardHelper.IsPress(pygame.K_1):
             AlarmClockScreen.timeHour += 1
             IScreen.ForceUpdate()
-        if KeyboardHelper.IsPress(pygame.K_2):
+        if KeyboardHelper.IsPress(pygame.K_KP2) | KeyboardHelper.IsPress(pygame.K_2):
             AlarmClockScreen.timeMinute += 10
             if AlarmClockScreen.timeMinute > 60:
                 AlarmClockScreen.timeHour += 1
                 AlarmClockScreen.timeMinute -= 60
             IScreen.ForceUpdate()
-        if KeyboardHelper.IsPress(pygame.K_3):
+        if KeyboardHelper.IsPress(pygame.K_KP3) | KeyboardHelper.IsPress(pygame.K_3):
             AlarmClockScreen.timeMinute += 1
             if AlarmClockScreen.timeMinute > 60:
                 AlarmClockScreen.timeHour += 1
@@ -37,14 +37,12 @@ class AlarmClockScreen(IScreen):
             AlarmClockScreen.timeMinute = 0
             AlarmClockScreen.timeSecond = 0
             AlarmClockScreen.isCounting = False
-        if KeyboardHelper.IsPress(pygame.K_KP_ENTER):
+        if KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN):
             AlarmClockScreen.isCounting = True
         pass
 
     def OnPaint(self):
         self.__PaintTime()
-
-
 
     def __PaintTime(self):
         _timeContentHour = ('%02d' % AlarmClockScreen.timeHour)
