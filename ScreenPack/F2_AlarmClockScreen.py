@@ -29,24 +29,7 @@ class AlarmClockScreen(IScreen):
             IScreen.ForceUpdate()
 
     def OnUpdatePerSecond(self):
-        if AlarmClockScreen.__isCounting == False:
-            return
-        _time = time.localtime()
-        _timeHourDiff = AlarmClockScreen.__timeHour - _time.tm_hour
-        _timeMinuteDiff = AlarmClockScreen.__timeMinute - _time.tm_min
-        _timeSecondDiff = AlarmClockScreen.__timeSecond - _time.tm_sec
-        _timeSecondDiff += _timeMinuteDiff * 60
-        _timeSecondDiff += _timeHourDiff * 60 * 60
-        if _timeSecondDiff <= 60 and AlarmClockScreen.__isAboutToEnd is False:
-            AlarmClockScreen.__isAboutToEnd = True
-            SoundHelper.PlaySpeech("AlarmClockIsAboutToEnd")
-        if _timeSecondDiff <= 0:
-            SoundHelper.PlaySound("src/Music/AlarmMusic9.wav")
-            AlarmClockScreen.__isAboutToEnd = False
-            AlarmClockScreen.__isCounting = False
-            self.__alarmTimeString = '0000'
-            IScreen.ForceUpdate()
-        self.totalSecondDiff = _timeSecondDiff
+        pass
 
     def OnUpdatePerMinute(self):
         pass
