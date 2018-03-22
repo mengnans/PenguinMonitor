@@ -14,7 +14,7 @@ class PillReminderScreen(IScreen):
 
     def __init__(self):
         self.__canvas = pygame.display.get_surface()
-        self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 111)
+        self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 268)
         self.__imgPillNotTaken = pygame.image.load('src/Icon/Pill_NotTaken.png')
         self.__imgPillTaken = pygame.image.load('src/Icon/Pill_Taken.png')
 
@@ -50,22 +50,18 @@ class PillReminderScreen(IScreen):
 
     def OnPaint(self):
         if PillReminderScreen.__isColinTaken:
-            self.__canvas.blit(self.__imgPillTaken, (5, 4))
-            self.__canvas.blit(self.__font.render("COLIN", True, (16, 16, 16)), (102, 0))
-            self.__canvas.blit(self.__font.render("COLIN", True, (64, 64, 64)), (100, -2))
+            self.__canvas.blit(self.__imgPillTaken, (4, 4))
+            IScreen.PaintShadowTextOffset(self.__canvas, self.__font, "COLIN", (64, 64, 64), (208, -9), 4)
         else:
-            self.__canvas.blit(self.__imgPillNotTaken, (5, 4))
-            self.__canvas.blit(self.__font.render("COLIN", True, (128, 128, 128)), (102, 0))
-            self.__canvas.blit(self.__font.render("COLIN", True, (255, 255, 255)), (100, -2))
+            self.__canvas.blit(self.__imgPillNotTaken, (4, 4))
+            IScreen.PaintShadowTextOffset(self.__canvas, self.__font, "COLIN", (255, 255, 255), (208, -9), 4)
 
         if PillReminderScreen.__isStoneTaken:
-            self.__canvas.blit(self.__imgPillTaken, (5, 90))
-            self.__canvas.blit(self.__font.render("STONE", True, (16, 16, 16)), (102, 86))
-            self.__canvas.blit(self.__font.render("STONE", True, (64, 64, 64)), (100, 84))
+            self.__canvas.blit(self.__imgPillTaken, (4, 204))
+            IScreen.PaintShadowTextOffset(self.__canvas, self.__font, "STONE", (64, 64, 64), (208, 191), 4)
         else:
-            self.__canvas.blit(self.__imgPillNotTaken, (5, 90))
-            self.__canvas.blit(self.__font.render("STONE", True, (128, 128, 128)), (102, 86))
-            self.__canvas.blit(self.__font.render("STONE", True, (255, 255, 255)), (100, 84))
+            self.__canvas.blit(self.__imgPillNotTaken, (4, 204))
+            IScreen.PaintShadowTextOffset(self.__canvas, self.__font, "STONE", (255, 255, 255), (208, 191), 4)
 
     def WriteToFile(self):
         __recordFile = open(PillReminderScreen.__dataFileName, "w")

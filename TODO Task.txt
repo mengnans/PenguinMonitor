@@ -8,3 +8,7 @@ Create a "Weather" panel to display:
     Weather in the next 3 days
 
 Warning when the temperature of raspberry is over 60'C by making a noise
+
+No paint after 22:00
+
+Clock ring every 9:00 to wake up stone
