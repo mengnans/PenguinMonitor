@@ -2,7 +2,7 @@ import pygame
 import time
 
 from DataPack.CourtScreen import CourtScreen
-from DataPack.DataWindow import DataWindow
+from DataPack.DataProgram import DataProgram
 from DataPack.Enum_ScreenType import ScreenType
 from ScreenPack.BottomGadgetsItem import BottomGadgetsItem
 from ScreenPack.IScreen import IScreen
@@ -24,8 +24,10 @@ class MyMonitor:
 
         PillReminderScreen.InitDataInfo()
 
-        self.__screen = pygame.display.set_mode((800, 600))
-        # self.__screen = pygame.display.set_mode((800, 600), pygame.FULLSCREEN)
+        if DataProgram.IsDebugMode == True:
+            self.__screen = pygame.display.set_mode((800, 600))
+        else:
+            self.__screen = pygame.display.set_mode((800, 600), pygame.FULLSCREEN)
         CourtScreen.screenTimeItem = TimeScreen()
         CourtScreen.screenAlarmClockItem = AlarmClockScreen()
         CourtScreen.screenPillReminderItem = PillReminderScreen()
@@ -38,7 +40,7 @@ class MyMonitor:
 
     def __GameLoop(self):
         while True:
-            pygame.time.Clock().tick(DataWindow.UpdatePerSecond)
+            pygame.time.Clock().tick(DataProgram.UpdatePerSecond)
             KeyboardHelper.Update()
             self.__GameEvent()
             CourtScreen.screenTimeItem.OnUpdate()

@@ -15,23 +15,49 @@ class AlarmClockScreen(IScreen):
 
     def __init__(self):
         self.__canvas = pygame.display.get_surface()
-        self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 200)
+        self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 540)
         self.__alarmTimeString = '0000'
         self.totalSecondDiff = 0
 
     def OnUpdate(self):
-        if AlarmClockScreen.__isCounting is False:
-            for _num in range(0, 10):
-                if KeyboardHelper.IsPress(pygame.K_KP0 + _num) | KeyboardHelper.IsPress(pygame.K_0 + _num):
-                    self.__alarmTimeString += str(_num)
-                    self.__alarmTimeString = self.__alarmTimeString[1:]
-                    IScreen.ForceUpdate()
-                    break
-        if KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN):
-            if self.__alarmTimeString.__eq__('0000'):
-                return
-            if AlarmClockScreen.__isCounting:
-                return
+        if AlarmClockScreen.__isCounting == False:
+            self.__OnKeyDownSelecting()
+        else:
+            _time = time.localtime()
+            _timeHourDiff = AlarmClockScreen.__timeHour - _time.tm_hour
+            _timeMinuteDiff = AlarmClockScreen.__timeMinute - _time.tm_min
+            _timeSecondDiff = AlarmClockScreen.__timeSecond - _time.tm_sec
+            _timeSecondDiff += _timeMinuteDiff * 60
+            _timeSecondDiff += _timeHourDiff * 60 * 60
+            if _timeSecondDiff <= 60 and AlarmClockScreen.__isAboutToEnd is False:
+                AlarmClockScreen.__isAboutToEnd = True
+                SoundHelper.PlaySpeech("AlarmClockIsAboutToEnd")
+            if _timeSecondDiff <= 0:
+                SoundHelper.PlaySound("src/Music/AlarmMusic9.wav")
+                AlarmClockScreen.__isAboutToEnd = False
+                AlarmClockScreen.__isCounting = False
+                self.__alarmTimeString = '0000'
+                IScreen.ForceUpdate()
+
+            self.totalSecondDiff = _timeSecondDiff
+            if KeyboardHelper.IsPress(pygame.K_ESCAPE):
+                SoundHelper.PlaySpeech("AlarmClockStopped")
+                AlarmClockScreen.__isCounting = False
+                AlarmClockScreen.__isAboutToEnd = False
+                IScreen.ForceUpdate()
+
+    def __OnKeyDownSelecting(self):
+        for _num in range(0, 10):
+            if KeyboardHelper.IsPress(pygame.K_KP0 + _num) | KeyboardHelper.IsPress(pygame.K_0 + _num):
+                self.__alarmTimeString += str(_num)
+                self.__alarmTimeString = self.__alarmTimeString[1:]
+                IScreen.ForceUpdate()
+                break
+        if KeyboardHelper.IsPress(pygame.K_ESCAPE):
+            self.__alarmTimeString = '0000'
+            IScreen.ForceUpdate()
+
+        if (KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN)) and self.__alarmTimeString.__eq__('0000') == False:
             AlarmClockScreen.__isCounting = True
             SoundHelper.PlaySpeech("AlarmClockStarted")
             AlarmClockScreen.__timeHour = int(self.__alarmTimeString[:2])
@@ -47,15 +73,6 @@ class AlarmClockScreen(IScreen):
             AlarmClockScreen.__timeMinute += _time.tm_min
             AlarmClockScreen.__timeSecond += _time.tm_sec
             IScreen.ForceUpdate()
-        if KeyboardHelper.IsPress(pygame.K_ESCAPE):
-            if AlarmClockScreen.__isCounting:
-                SoundHelper.PlaySpeech("AlarmClockStopped")
-                AlarmClockScreen.__isCounting = False
-                AlarmClockScreen.__isAboutToEnd = False
-                IScreen.ForceUpdate()
-            else:
-                self.__alarmTimeString = '0000'
-                IScreen.ForceUpdate()
 
     def OnPaint(self):
         if AlarmClockScreen.__isCounting is False:
@@ -71,50 +88,34 @@ class AlarmClockScreen(IScreen):
             _timeSecondDiff += _timeHourDiff * 60 * 60
             self.totalSecondDiff = _timeSecondDiff
 
-            if _timeSecondDiff <= 0:
-                SoundHelper.PlaySound("src/Music/AlarmMusic9.wav")
-                AlarmClockScreen.__isAboutToEnd = False
-                AlarmClockScreen.__isCounting = False
-                self.__alarmTimeString = '0000'
-                _leftContent = self.__alarmTimeString[:2]
-                _rightContent = self.__alarmTimeString[2:]
-                self.__PaintTime(_leftContent, _rightContent, (255, 255, 0))
+            if _timeSecondDiff >= 3600:
+                _leftContent = int(_timeSecondDiff / 3600)
+                _timeSecondDiff %= 3600
+                _rightContent = int(_timeSecondDiff / 60)
+                self.__PaintTime('%02d' % _leftContent, '%02d' % _rightContent, (255, 255, 0))
             else:
-                if _timeSecondDiff >= 3600:
-                    _leftContent = int(_timeSecondDiff / 3600)
-                    _timeSecondDiff %= 3600
-                    _rightContent = int(_timeSecondDiff / 60)
-                    self.__PaintTime('%02d' % _leftContent, '%02d' % _rightContent, (255, 255, 0))
-                else:
-                    _leftContent = int(_timeSecondDiff / 60)
-                    _rightContent = _timeSecondDiff % 60
-                    if _timeSecondDiff <= 60 and AlarmClockScreen.__isAboutToEnd is False:
-                        AlarmClockScreen.__isAboutToEnd = True
-                        SoundHelper.PlaySpeech("AlarmClockIsAboutToEnd")
-                    self.__PaintTime('%02d' % _leftContent, '%02d' % _rightContent, (255, 165, 165))
+                _leftContent = int(_timeSecondDiff / 60)
+                _rightContent = _timeSecondDiff % 60
+                self.__PaintTime('%02d' % _leftContent, '%02d' % _rightContent, (255, 165, 165))
 
     def __PaintTime(self, argLeftContent, argRightContent, argRightContentColor):
         # Draw hour value
-        _renderText = self.__font.render(argLeftContent, True, (255, 255, 0))
+        _renderText = self.__font.render(argLeftContent, True, (255, 255, 255))
         _recText = _renderText.get_rect()
-        _locationX = (152 - (_recText[2] - 10)) / 2
-        self.__canvas.blit(self.__font.render(argLeftContent, True, (128, 128, 128)), (_locationX + 2, 7))
-        self.__canvas.blit(_renderText, (_locationX, 5))
+        _locationX = (370 - (_recText[2] - 17)) / 2
+        IScreen.PaintShadowText(self.__canvas, self.__font, argLeftContent, (255, 255, 128), (_locationX, -17))
 
         # Draw colon
         if self.totalSecondDiff % 2 == 0:
-            self.__canvas.blit(self.__font.render(":", True, (128, 128, 128)), (154, -18))
-            self.__canvas.blit(self.__font.render(":", True, (255, 255, 0)), (152, -20))
+            IScreen.PaintShadowText(self.__canvas, self.__font, ":", (255, 255, 128), (370, -93))
         else:
-            self.__canvas.blit(self.__font.render(":", True, (64, 64, 64)), (154, -18))
-            self.__canvas.blit(self.__font.render(":", True, (128, 128, 128)), (152, -20))
+            IScreen.PaintShadowText(self.__canvas, self.__font, ":", (64, 64, 64), (370, -93))
 
         # Draw minute value
-        _renderText = self.__font.render(argRightContent, True, argRightContentColor)
+        _renderText = self.__font.render(argRightContent, True, (255, 255, 255))
         _recText = _renderText.get_rect()
-        _locationX = 168 + (152 - (_recText[2] - 10)) / 2
-        self.__canvas.blit(self.__font.render(argRightContent, True, (128, 128, 128)), (_locationX + 2, 7))
-        self.__canvas.blit(_renderText, (_locationX, 5))
+        _locationX = 430 + (370 - (_recText[2] - 17)) / 2
+        IScreen.PaintShadowText(self.__canvas, self.__font, argRightContent, (255, 255, 128), (_locationX, -17))
 
     @staticmethod
     def IsCounting():

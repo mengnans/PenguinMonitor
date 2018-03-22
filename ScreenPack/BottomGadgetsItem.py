@@ -3,7 +3,6 @@ import pygame
 from DataPack.CourtScreen import CourtScreen
 from DataPack.Enum_ScreenType import ScreenType
 from ScreenPack.AlarmClockScreen import AlarmClockScreen
-from DataPack.DataWindow import DataWindow
 from ScreenPack.IScreen import IScreen
 from ScreenPack.TimeScreen import TimeScreen
 from ScreenPack.PillReminderScreen import PillReminderScreen
