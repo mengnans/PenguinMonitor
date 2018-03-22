@@ -4,7 +4,7 @@ from DataPack.CourtScreen import CourtScreen
 from DataPack.Enum_ScreenType import ScreenType
 from ScreenPack.AlarmClockScreen import AlarmClockScreen
 from DataPack.DataWindow import DataWindow
-from ScreenPack.TimeScreen import MainScreen
+from ScreenPack.TimeScreen import TimeScreen
 from ScreenPack.PillReminderScreen import PillReminderScreen
 from Utility.SystemInfoHelper import SystemInfoHelper
 
@@ -29,22 +29,22 @@ class BottomGadgetsItem:
 
         # Print pill related icon
         if CourtScreen.screenType == ScreenType.PillReminder:
-            self.__canvas.blit(self.__imgPillHalo, (264 - 8, 184 - 8))
+            self.__canvas.blit(self.__imgPillHalo, (200 - 8, 184 - 8))
         if PillReminderScreen.IsNotTakenToday():
-            self.__canvas.blit(self.__imgPillNotTaken, (264, 184))
+            self.__canvas.blit(self.__imgPillNotTaken, (200, 184))
         else:
-            self.__canvas.blit(self.__imgPill, (264, 184))
+            self.__canvas.blit(self.__imgPill, (200, 184))
 
         # Print alarm clock related icon
         if CourtScreen.screenType == ScreenType.AlarmClock:
-            self.__canvas.blit(self.__imgAlarmClockHalo, (200 - 8, 184 - 8))
+            self.__canvas.blit(self.__imgAlarmClockHalo, (136 - 8, 184 - 8))
         if AlarmClockScreen.IsCounting():
-            if AlarmClockScreen.IsAboutToEnd() and MainScreen.timeSecond % 2 == 0:
-                self.__canvas.blit(self.__imgAlarmClockWarning, (200, 184))
+            if AlarmClockScreen.IsAboutToEnd() and TimeScreen.timeSecond % 2 == 0:
+                self.__canvas.blit(self.__imgAlarmClockWarning, (136, 184))
             else:
-                self.__canvas.blit(self.__imgAlarmClockWorking, (200, 184))
+                self.__canvas.blit(self.__imgAlarmClockWorking, (136, 184))
         else:
-            self.__canvas.blit(self.__imgAlarmClock, (200, 184))
+            self.__canvas.blit(self.__imgAlarmClock, (136, 184))
 
         _temperature = SystemInfoHelper.GetTemperature()
         _temperatureContent = str(_temperature) + "'C"

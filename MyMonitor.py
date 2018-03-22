@@ -6,9 +6,10 @@ from DataPack.DataWindow import DataWindow
 from DataPack.Enum_ScreenType import ScreenType
 from ScreenPack.BottomGadgetsItem import BottomGadgetsItem
 from ScreenPack.IScreen import IScreen
-from ScreenPack.TimeScreen import MainScreen
+from ScreenPack.TimeScreen import TimeScreen
 from ScreenPack.AlarmClockScreen import AlarmClockScreen
 from ScreenPack.PillReminderScreen import PillReminderScreen
+from ScreenPack.WeatherScreen import WeatherScreen
 from Utility.FpsDisplayItem import FpsDisplayItem
 from Utility.KeyboardHelper import KeyboardHelper
 from Utility.SoundHelper import SoundHelper
@@ -25,10 +26,11 @@ class MyMonitor:
 
         self.__screen = pygame.display.set_mode((320, 240))
         # self.__screen = pygame.display.set_mode((320, 240), pygame.FULLSCREEN)
-        CourtScreen.screenItem = MainScreen()
-        # CourtScreen.screenItem = AlarmClockScreen()
-        # CourtScreen.screenItem = PillReminderScreen()
-        CourtScreen.screenType = ScreenType.MainScreen
+        CourtScreen.screenTimeItem = TimeScreen()
+        CourtScreen.screenAlarmClockItem = AlarmClockScreen()
+        CourtScreen.screenPillReminderItem = PillReminderScreen()
+        CourtScreen.screenWeatherItem = WeatherScreen()
+        CourtScreen.screenType = ScreenType.Time
         CourtScreen.bottomGadget = BottomGadgetsItem()
         self.__fpsItem = FpsDisplayItem()
         self.__lastTickSecond = 0
@@ -39,7 +41,10 @@ class MyMonitor:
             pygame.time.Clock().tick(DataWindow.UpdatePerSecond)
             KeyboardHelper.Update()
             self.__GameEvent()
-            CourtScreen.screenItem.OnUpdate()
+            CourtScreen.screenTimeItem.OnUpdate()
+            CourtScreen.screenAlarmClockItem.OnUpdate()
+            CourtScreen.screenPillReminderItem.OnUpdate()
+            CourtScreen.screenWeatherItem.OnUpdate()
             if IScreen.isForceUpdate or int(time.time()) != self.__lastTickSecond:
                 IScreen.isForceUpdate = False
                 self.__lastTickSecond = int(time.time())
@@ -60,19 +65,25 @@ class MyMonitor:
 
     @staticmethod
     def __ChangeScreen():
-        if CourtScreen.screenType == ScreenType.MainScreen:
+        if CourtScreen.screenType == ScreenType.Time:
             CourtScreen.screenType = ScreenType.AlarmClock
-            CourtScreen.screenItem = AlarmClockScreen()
         elif CourtScreen.screenType == ScreenType.AlarmClock:
             CourtScreen.screenType = ScreenType.PillReminder
-            CourtScreen.screenItem = PillReminderScreen()
         elif CourtScreen.screenType == ScreenType.PillReminder:
-            CourtScreen.screenType = ScreenType.MainScreen
-            CourtScreen.screenItem = MainScreen()
+            CourtScreen.screenType = ScreenType.Weather
+        elif CourtScreen.screenType == ScreenType.Weather:
+            CourtScreen.screenType = ScreenType.Time
 
     def __GamePaint(self):
         pygame.display.get_surface().fill((0, 0, 0))
-        CourtScreen.screenItem.OnPaint()
+        if CourtScreen.screenType == ScreenType.Time:
+            CourtScreen.screenTimeItem.OnPaint()
+        if CourtScreen.screenType == ScreenType.AlarmClock:
+            CourtScreen.screenAlarmClockItem.OnPaint()
+        if CourtScreen.screenType == ScreenType.PillReminder:
+            CourtScreen.screenPillReminderItem.OnPaint()
+        if CourtScreen.screenType == ScreenType.Weather:
+            CourtScreen.screenWeatherItem.OnPaint()
         CourtScreen.bottomGadget.OnPaint()
         self.__fpsItem.Tick()
 

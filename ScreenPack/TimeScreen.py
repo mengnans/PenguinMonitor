@@ -4,7 +4,7 @@ import pygame
 from ScreenPack.IScreen import IScreen
 
 
-class MainScreen(IScreen):
+class TimeScreen(IScreen):
     timeHour = 0
     timeMinute = 0
     timeSecond = 0
@@ -18,11 +18,11 @@ class MainScreen(IScreen):
 
     def OnPaint(self):
         _time = time.localtime()
-        MainScreen.timeHour = _time.tm_hour
-        MainScreen.timeMinute = _time.tm_min
-        MainScreen.timeSecond = _time.tm_sec
-        _timeContentHour = ('%02d' % MainScreen.timeHour)
-        _timeContentMinute = ('%02d' % MainScreen.timeMinute)
+        TimeScreen.timeHour = _time.tm_hour
+        TimeScreen.timeMinute = _time.tm_min
+        TimeScreen.timeSecond = _time.tm_sec
+        _timeContentHour = ('%02d' % TimeScreen.timeHour)
+        _timeContentMinute = ('%02d' % TimeScreen.timeMinute)
 
         # Draw hour value
         _renderText = self.__font.render(_timeContentHour, True, (255, 255, 255))
@@ -32,7 +32,7 @@ class MainScreen(IScreen):
         self.__canvas.blit(_renderText, (_locationX, 5))
 
         # Draw colon
-        if MainScreen.timeSecond % 2 == 0:
+        if TimeScreen.timeSecond % 2 == 0:
             self.__canvas.blit(self.__font.render(":", True, (128, 128, 128)), (154, -18))
             self.__canvas.blit(self.__font.render(":", True, (255, 255, 255)), (152, -20))
         else:
