@@ -24,8 +24,8 @@ class MyMonitor:
 
         PillReminderScreen.InitDataInfo()
 
-        self.__screen = pygame.display.set_mode((320, 240))
-        # self.__screen = pygame.display.set_mode((320, 240), pygame.FULLSCREEN)
+        self.__screen = pygame.display.set_mode((800, 600))
+        # self.__screen = pygame.display.set_mode((800, 600), pygame.FULLSCREEN)
         CourtScreen.screenTimeItem = TimeScreen()
         CourtScreen.screenAlarmClockItem = AlarmClockScreen()
         CourtScreen.screenPillReminderItem = PillReminderScreen()
