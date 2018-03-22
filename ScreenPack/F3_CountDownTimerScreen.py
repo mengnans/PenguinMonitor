@@ -28,7 +28,7 @@ class CountDownTimerScreen(IScreen):
             CountDownTimerScreen.__isAboutToEnd = False
             IScreen.ForceUpdate()
 
-    def OnUpdateSecond(self):
+    def OnUpdatePerSecond(self):
         if CountDownTimerScreen.__isCounting == False:
             return
         _time = time.localtime()
@@ -48,7 +48,7 @@ class CountDownTimerScreen(IScreen):
             IScreen.ForceUpdate()
         self.totalSecondDiff = _timeSecondDiff
 
-    def OnUpdateMinute(self):
+    def OnUpdatePerMinute(self):
         pass
 
     def __OnKeyDownSelecting(self):

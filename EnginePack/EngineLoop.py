@@ -24,19 +24,19 @@ class EngineLoop:
         CourtScreen.screenWeatherItem.OnUpdate()
 
         if self.__lastTickSecond != _time.tm_sec:
-            CourtScreen.screenTimeItem.OnUpdateSecond()
-            CourtScreen.screenAlarmClockItem.OnUpdateSecond()
-            CourtScreen.screenPillReminderItem.OnUpdateSecond()
-            CourtScreen.screenWeatherItem.OnUpdateSecond()
+            CourtScreen.screenTimeItem.OnUpdatePerSecond()
+            CourtScreen.screenAlarmClockItem.OnUpdatePerSecond()
+            CourtScreen.screenPillReminderItem.OnUpdatePerSecond()
+            CourtScreen.screenWeatherItem.OnUpdatePerSecond()
             _isPaint = True
             self.__lastTickSecond = True
             pass
 
         if self.__lastTickSecond != _time.tm_min:
-            CourtScreen.screenTimeItem.OnUpdateMinute()
-            CourtScreen.screenAlarmClockItem.OnUpdateMinute()
-            CourtScreen.screenPillReminderItem.OnUpdateMinute()
-            CourtScreen.screenWeatherItem.OnUpdateMinute()
+            CourtScreen.screenTimeItem.OnUpdatePerMinute()
+            CourtScreen.screenAlarmClockItem.OnUpdatePerMinute()
+            CourtScreen.screenPillReminderItem.OnUpdatePerMinute()
+            CourtScreen.screenWeatherItem.OnUpdatePerMinute()
             _isPaint = True
             self.__lastTickMinute = True
             pass

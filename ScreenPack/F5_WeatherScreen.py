@@ -7,10 +7,10 @@ class WeatherScreen(IScreen):
     def OnUpdate(self):
         pass
 
-    def OnUpdateSecond(self):
+    def OnUpdatePerSecond(self):
         pass
 
-    def OnUpdateMinute(self):
+    def OnUpdatePerMinute(self):
         pass
 
     def OnPaint(self):

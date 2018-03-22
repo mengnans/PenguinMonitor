@@ -9,11 +9,11 @@ class IScreen:
         pass
 
     @abstractmethod
-    def OnUpdateSecond(self):
+    def OnUpdatePerSecond(self):
         pass
 
     @abstractmethod
-    def OnUpdateMinute(self):
+    def OnUpdatePerMinute(self):
         pass
 
     @abstractmethod
