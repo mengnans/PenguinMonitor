@@ -28,7 +28,7 @@ class EngineKeyboard:
             CourtScreen.screenType = ScreenType.PillReminder
         if KeyboardHelper.IsPress(pygame.K_F4):
             CourtScreen.screenType = ScreenType.Weather
-        # if KeyboardHelper.IsPress(pygame.K_F5):
+        # if KeyboardHelper.IsPress(pygame.K_F9):
         #     CourtScreen.screenType = ScreenType.Time
 
     def __ChangeNextScreen(self):

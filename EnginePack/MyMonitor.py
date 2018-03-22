@@ -11,7 +11,7 @@ from ScreenPack.IScreen import IScreen
 from ScreenPack.F1_TimeScreen import TimeScreen
 from ScreenPack.F2_AlarmClockScreen import AlarmClockScreen
 from ScreenPack.F4_PillReminderScreen import PillReminderScreen
-from ScreenPack.WeatherScreen import WeatherScreen
+from ScreenPack.F5_WeatherScreen import WeatherScreen
 from Utility.FpsDisplayItem import FpsDisplayItem
 from Utility.InternetHelper import InternetHelper
 from Utility.KeyboardHelper import KeyboardHelper
