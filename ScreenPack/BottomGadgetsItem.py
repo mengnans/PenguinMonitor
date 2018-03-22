@@ -24,16 +24,20 @@ class BottomGadgetsItem:
         self.__imgPillHalo = pygame.image.load('src/Icon/Bottom_PillHalo.png')
         self.__imgPillNotTaken = pygame.image.load('src/Icon/Bottom_PillNotTaken.png')
 
+        self.__imgWeather = pygame.image.load('src/Icon/Bottom_Weather.png')
+        self.__imgWeatherHalo = pygame.image.load('src/Icon/Bottom_WeatherHalo.png')
+
     def OnPaint(self):
         pygame.draw.line(self.__canvas, (64, 64, 64), (0, 175), (DataWindow.WindowsSize[0], 175), 1)
 
-        # Print pill related icon
-        if CourtScreen.screenType == ScreenType.PillReminder:
-            self.__canvas.blit(self.__imgPillHalo, (200 - 8, 184 - 8))
-        if PillReminderScreen.IsNotTakenToday():
-            self.__canvas.blit(self.__imgPillNotTaken, (200, 184))
+        # Print current temperature
+        _temperature = SystemInfoHelper.GetTemperature()
+        _temperatureContent = str(_temperature) + "'C"
+        self.__canvas.blit(self.__fontSmall.render(_temperatureContent, True, (64, 64, 64)), (9, 186))
+        if _temperature <= 60:
+            self.__canvas.blit(self.__fontSmall.render(_temperatureContent, True, (192, 192, 192)), (7, 184))
         else:
-            self.__canvas.blit(self.__imgPill, (200, 184))
+            self.__canvas.blit(self.__fontSmall.render(_temperatureContent, True, (255, 255, 0)), (7, 184))
 
         # Print alarm clock related icon
         if CourtScreen.screenType == ScreenType.AlarmClock:
@@ -46,10 +50,15 @@ class BottomGadgetsItem:
         else:
             self.__canvas.blit(self.__imgAlarmClock, (136, 184))
 
-        _temperature = SystemInfoHelper.GetTemperature()
-        _temperatureContent = str(_temperature) + "'C"
-        self.__canvas.blit(self.__fontSmall.render(_temperatureContent, True, (64, 64, 64)), (9, 186))
-        if _temperature <= 60:
-            self.__canvas.blit(self.__fontSmall.render(_temperatureContent, True, (192, 192, 192)), (7, 184))
+        # Print pill related icon
+        if CourtScreen.screenType == ScreenType.PillReminder:
+            self.__canvas.blit(self.__imgPillHalo, (200 - 8, 184 - 8))
+        if PillReminderScreen.IsNotTakenToday():
+            self.__canvas.blit(self.__imgPillNotTaken, (200, 184))
         else:
-            self.__canvas.blit(self.__fontSmall.render(_temperatureContent, True, (255, 255, 0)), (7, 184))
+            self.__canvas.blit(self.__imgPill, (200, 184))
+
+        # Print weather related icon
+        if CourtScreen.screenType == ScreenType.Weather:
+            self.__canvas.blit(self.__imgWeatherHalo, (264 - 8, 184 - 8))
+        self.__canvas.blit(self.__imgWeather, (264, 184))
