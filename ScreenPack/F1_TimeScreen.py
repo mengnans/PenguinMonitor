@@ -5,6 +5,7 @@ from ScreenPack.IScreen import IScreen
 
 
 class TimeScreen(IScreen):
+
     timeHour = 0
     timeMinute = 0
     timeSecond = 0
@@ -14,6 +15,12 @@ class TimeScreen(IScreen):
         self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 540)
 
     def OnUpdate(self):
+        pass
+
+    def OnUpdateSecond(self):
+        pass
+
+    def OnUpdateMinute(self):
         pass
 
     def OnPaint(self):

@@ -2,10 +2,10 @@ import pygame
 
 from DataPack.CourtScreen import CourtScreen
 from DataPack.Enum_ScreenType import ScreenType
-from ScreenPack.AlarmClockScreen import AlarmClockScreen
+from ScreenPack.F2_AlarmClockScreen import AlarmClockScreen
 from ScreenPack.IScreen import IScreen
-from ScreenPack.TimeScreen import TimeScreen
-from ScreenPack.PillReminderScreen import PillReminderScreen
+from ScreenPack.F1_TimeScreen import TimeScreen
+from ScreenPack.F4_PillReminderScreen import PillReminderScreen
 from Utility.SystemInfoHelper import SystemInfoHelper
 
 

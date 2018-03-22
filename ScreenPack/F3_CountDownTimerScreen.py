@@ -6,7 +6,7 @@ from Utility.KeyboardHelper import KeyboardHelper
 from Utility.SoundHelper import SoundHelper
 
 
-class AlarmClockScreen(IScreen):
+class CountDownTimerScreen(IScreen):
     __isCounting = False
     __isAboutToEnd = False
     __timeHour = 0
@@ -20,31 +20,36 @@ class AlarmClockScreen(IScreen):
         self.totalSecondDiff = 0
 
     def OnUpdate(self):
-        if AlarmClockScreen.__isCounting == False:
+        if CountDownTimerScreen.__isCounting == False:
             self.__OnKeyDownSelecting()
-        else:
-            _time = time.localtime()
-            _timeHourDiff = AlarmClockScreen.__timeHour - _time.tm_hour
-            _timeMinuteDiff = AlarmClockScreen.__timeMinute - _time.tm_min
-            _timeSecondDiff = AlarmClockScreen.__timeSecond - _time.tm_sec
-            _timeSecondDiff += _timeMinuteDiff * 60
-            _timeSecondDiff += _timeHourDiff * 60 * 60
-            if _timeSecondDiff <= 60 and AlarmClockScreen.__isAboutToEnd is False:
-                AlarmClockScreen.__isAboutToEnd = True
-                SoundHelper.PlaySpeech("AlarmClockIsAboutToEnd")
-            if _timeSecondDiff <= 0:
-                SoundHelper.PlaySound("src/Music/AlarmMusic9.wav")
-                AlarmClockScreen.__isAboutToEnd = False
-                AlarmClockScreen.__isCounting = False
-                self.__alarmTimeString = '0000'
-                IScreen.ForceUpdate()
+        elif KeyboardHelper.IsPress(pygame.K_ESCAPE):
+            SoundHelper.PlaySpeech("AlarmClockStopped")
+            CountDownTimerScreen.__isCounting = False
+            CountDownTimerScreen.__isAboutToEnd = False
+            IScreen.ForceUpdate()
 
-            self.totalSecondDiff = _timeSecondDiff
-            if KeyboardHelper.IsPress(pygame.K_ESCAPE):
-                SoundHelper.PlaySpeech("AlarmClockStopped")
-                AlarmClockScreen.__isCounting = False
-                AlarmClockScreen.__isAboutToEnd = False
-                IScreen.ForceUpdate()
+    def OnUpdateSecond(self):
+        if CountDownTimerScreen.__isCounting == False:
+            return
+        _time = time.localtime()
+        _timeHourDiff = CountDownTimerScreen.__timeHour - _time.tm_hour
+        _timeMinuteDiff = CountDownTimerScreen.__timeMinute - _time.tm_min
+        _timeSecondDiff = CountDownTimerScreen.__timeSecond - _time.tm_sec
+        _timeSecondDiff += _timeMinuteDiff * 60
+        _timeSecondDiff += _timeHourDiff * 60 * 60
+        if _timeSecondDiff <= 60 and CountDownTimerScreen.__isAboutToEnd is False:
+            CountDownTimerScreen.__isAboutToEnd = True
+            SoundHelper.PlaySpeech("AlarmClockIsAboutToEnd")
+        if _timeSecondDiff <= 0:
+            SoundHelper.PlaySound("src/Music/AlarmMusic9.wav")
+            CountDownTimerScreen.__isAboutToEnd = False
+            CountDownTimerScreen.__isCounting = False
+            self.__alarmTimeString = '0000'
+            IScreen.ForceUpdate()
+        self.totalSecondDiff = _timeSecondDiff
+
+    def OnUpdateMinute(self):
+        pass
 
     def __OnKeyDownSelecting(self):
         for _num in range(0, 10):
@@ -58,32 +63,32 @@ class AlarmClockScreen(IScreen):
             IScreen.ForceUpdate()
 
         if (KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN)) and self.__alarmTimeString.__eq__('0000') == False:
-            AlarmClockScreen.__isCounting = True
+            CountDownTimerScreen.__isCounting = True
             SoundHelper.PlaySpeech("AlarmClockStarted")
-            AlarmClockScreen.__timeHour = int(self.__alarmTimeString[:2])
-            AlarmClockScreen.__timeMinute = int(self.__alarmTimeString[2:])
-            AlarmClockScreen.__timeSecond = 0
+            CountDownTimerScreen.__timeHour = int(self.__alarmTimeString[:2])
+            CountDownTimerScreen.__timeMinute = int(self.__alarmTimeString[2:])
+            CountDownTimerScreen.__timeSecond = 0
             _timeMinuteDiff = 0
-            _timeMinuteDiff += AlarmClockScreen.__timeMinute
-            _timeMinuteDiff += AlarmClockScreen.__timeHour * 60
+            _timeMinuteDiff += CountDownTimerScreen.__timeMinute
+            _timeMinuteDiff += CountDownTimerScreen.__timeHour * 60
             if _timeMinuteDiff <= 1:
-                AlarmClockScreen.__isAboutToEnd = True
+                CountDownTimerScreen.__isAboutToEnd = True
             _time = time.localtime()
-            AlarmClockScreen.__timeHour += _time.tm_hour
-            AlarmClockScreen.__timeMinute += _time.tm_min
-            AlarmClockScreen.__timeSecond += _time.tm_sec
+            CountDownTimerScreen.__timeHour += _time.tm_hour
+            CountDownTimerScreen.__timeMinute += _time.tm_min
+            CountDownTimerScreen.__timeSecond += _time.tm_sec
             IScreen.ForceUpdate()
 
     def OnPaint(self):
-        if AlarmClockScreen.__isCounting is False:
+        if CountDownTimerScreen.__isCounting is False:
             _leftContent = self.__alarmTimeString[:2]
             _rightContent = self.__alarmTimeString[2:]
             self.__PaintTime(_leftContent, _rightContent, (255, 255, 0))
         else:
             _time = time.localtime()
-            _timeHourDiff = AlarmClockScreen.__timeHour - _time.tm_hour
-            _timeMinuteDiff = AlarmClockScreen.__timeMinute - _time.tm_min
-            _timeSecondDiff = AlarmClockScreen.__timeSecond - _time.tm_sec
+            _timeHourDiff = CountDownTimerScreen.__timeHour - _time.tm_hour
+            _timeMinuteDiff = CountDownTimerScreen.__timeMinute - _time.tm_min
+            _timeSecondDiff = CountDownTimerScreen.__timeSecond - _time.tm_sec
             _timeSecondDiff += _timeMinuteDiff * 60
             _timeSecondDiff += _timeHourDiff * 60 * 60
             self.totalSecondDiff = _timeSecondDiff
@@ -119,8 +124,8 @@ class AlarmClockScreen(IScreen):
 
     @staticmethod
     def IsCounting():
-        return AlarmClockScreen.__isCounting
+        return CountDownTimerScreen.__isCounting
 
     @staticmethod
     def IsAboutToEnd():
-        return AlarmClockScreen.__isAboutToEnd
+        return CountDownTimerScreen.__isAboutToEnd

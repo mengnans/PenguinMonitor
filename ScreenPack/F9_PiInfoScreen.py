@@ -1,8 +1,7 @@
-import pygame
 from ScreenPack.IScreen import IScreen
 
 
-class WeatherScreen(IScreen):
+class PiInfoScreen(IScreen):
 
     def OnUpdate(self):
         pass

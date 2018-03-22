@@ -9,6 +9,14 @@ class IScreen:
         pass
 
     @abstractmethod
+    def OnUpdateSecond(self):
+        pass
+
+    @abstractmethod
+    def OnUpdateMinute(self):
+        pass
+
+    @abstractmethod
     def OnPaint(self):
         pass
 
