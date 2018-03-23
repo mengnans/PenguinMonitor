@@ -20,25 +20,30 @@ class EngineLoop:
 
         CourtScreen.screenTimeItem.OnUpdate()
         CourtScreen.screenAlarmClockItem.OnUpdate()
+        CourtScreen.screenCountdownTimerItem.OnUpdate()
         CourtScreen.screenPillReminderItem.OnUpdate()
         CourtScreen.screenWeatherItem.OnUpdate()
+        CourtScreen.screenPiInfoItem.OnUpdate()
 
         if self.__lastTickSecond != _time.tm_sec:
+            self.__lastTickSecond = _time.tm_sec
             CourtScreen.screenTimeItem.OnUpdatePerSecond()
             CourtScreen.screenAlarmClockItem.OnUpdatePerSecond()
+            CourtScreen.screenCountdownTimerItem.OnUpdatePerSecond()
             CourtScreen.screenPillReminderItem.OnUpdatePerSecond()
             CourtScreen.screenWeatherItem.OnUpdatePerSecond()
+            CourtScreen.screenPiInfoItem.OnUpdatePerSecond()
             _isPaint = True
-            self.__lastTickSecond = True
             pass
 
-        if self.__lastTickSecond != _time.tm_min:
+        if self.__lastTickMinute != _time.tm_min:
+            self.__lastTickMinute = _time.tm_min
             CourtScreen.screenTimeItem.OnUpdatePerMinute()
             CourtScreen.screenAlarmClockItem.OnUpdatePerMinute()
+            CourtScreen.screenCountdownTimerItem.OnUpdatePerMinute()
             CourtScreen.screenPillReminderItem.OnUpdatePerMinute()
             CourtScreen.screenWeatherItem.OnUpdatePerMinute()
-            _isPaint = True
-            self.__lastTickMinute = True
+            CourtScreen.screenPiInfoItem.OnUpdatePerMinute()
             pass
 
         if _isPaint:
@@ -51,9 +56,13 @@ class EngineLoop:
             CourtScreen.screenTimeItem.OnPaint()
         if CourtScreen.screenType == ScreenType.AlarmClock:
             CourtScreen.screenAlarmClockItem.OnPaint()
+        if CourtScreen.screenType == ScreenType.CountDownTimer:
+            CourtScreen.screenCountdownTimerItem.OnPaint()
         if CourtScreen.screenType == ScreenType.PillReminder:
             CourtScreen.screenPillReminderItem.OnPaint()
         if CourtScreen.screenType == ScreenType.Weather:
             CourtScreen.screenWeatherItem.OnPaint()
+        if CourtScreen.screenType == ScreenType.PiInfo:
+            CourtScreen.screenPiInfoItem.OnPaint()
         CourtScreen.bottomGadget.OnPaint()
         self.__fpsItem.Tick()

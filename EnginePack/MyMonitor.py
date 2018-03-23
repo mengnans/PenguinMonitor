@@ -7,6 +7,8 @@ from DataPack.Enum_ScreenType import ScreenType
 from EnginePack.EngineKeybord import EngineKeyboard
 from EnginePack.EngineLoop import EngineLoop
 from ScreenPack.BottomGadgetsItem import BottomGadgetsItem
+from ScreenPack.F3_CountDownTimerScreen import CountDownTimerScreen
+from ScreenPack.F9_PiInfoScreen import PiInfoScreen
 from ScreenPack.IScreen import IScreen
 from ScreenPack.F1_TimeScreen import TimeScreen
 from ScreenPack.F2_AlarmClockScreen import AlarmClockScreen
@@ -39,8 +41,10 @@ class MyMonitor:
         PillReminderScreen.InitDataInfo()
         CourtScreen.screenTimeItem = TimeScreen()
         CourtScreen.screenAlarmClockItem = AlarmClockScreen()
+        CourtScreen.screenCountdownTimerItem = CountDownTimerScreen()
         CourtScreen.screenPillReminderItem = PillReminderScreen()
         CourtScreen.screenWeatherItem = WeatherScreen()
+        CourtScreen.screenPiInfoItem = PiInfoScreen()
         CourtScreen.screenType = ScreenType.Time
         CourtScreen.bottomGadget = BottomGadgetsItem()
 

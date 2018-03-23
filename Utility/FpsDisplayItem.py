@@ -19,8 +19,6 @@ class FpsDisplayItem:
 
     @OnDebug
     def Tick(self):
-        if DataProgram.IsDebugMode == False:
-            return
         self.__fpsTick = self.__fpsTick + 1
         if int(time.time()) != self.__second:
             _currentTime = time.time()
@@ -29,4 +27,4 @@ class FpsDisplayItem:
             self.__lastUpdateTick = _currentTime
             self.__fpsTick = 0
 
-        self.__canvas.blit(self.__font.render("%.2f" % self.__fps, True, (128, 128, 128)), (2, -2))
+        self.__canvas.blit(self.__font.render("%.2f" % self.__fps, True, (255, 255, 255)), (2, -2))

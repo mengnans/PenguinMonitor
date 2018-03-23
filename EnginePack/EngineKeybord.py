@@ -25,11 +25,13 @@ class EngineKeyboard:
         if KeyboardHelper.IsPress(pygame.K_F2):
             CourtScreen.screenType = ScreenType.AlarmClock
         if KeyboardHelper.IsPress(pygame.K_F3):
-            CourtScreen.screenType = ScreenType.PillReminder
+            CourtScreen.screenType = ScreenType.CountDownTimer
         if KeyboardHelper.IsPress(pygame.K_F4):
+            CourtScreen.screenType = ScreenType.PillReminder
+        if KeyboardHelper.IsPress(pygame.K_F5):
             CourtScreen.screenType = ScreenType.Weather
-        # if KeyboardHelper.IsPress(pygame.K_F9):
-        #     CourtScreen.screenType = ScreenType.Time
+        if KeyboardHelper.IsPress(pygame.K_F9):
+            CourtScreen.screenType = ScreenType.Time
 
     def __ChangeNextScreen(self):
         if CourtScreen.screenType == ScreenType.Time:
