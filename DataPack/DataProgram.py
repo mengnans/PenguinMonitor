@@ -1,4 +1,4 @@
 class DataProgram:
-    IsDebugMode = True
-    # IsDebugMode = False
+    # IsDebugMode = True
+    IsDebugMode = False
     UpdatePerSecond = 24

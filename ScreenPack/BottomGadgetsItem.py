@@ -16,16 +16,14 @@ class BottomGadgetsItem:
         self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 72)
 
         self.__imgAlarmClock = pygame.image.load('src/Icon/Bottom_Clock.png')
-        self.__imgAlarmClockHalo = pygame.image.load('src/Icon/Bottom_ClockHalo.png')
-        self.__imgAlarmClockWarning = pygame.image.load('src/Icon/Bottom_ClockWarning.png')
+        self.__imgAlarmClockSelected = pygame.image.load('src/Icon/Bottom_ClockSelected.png')
         self.__imgAlarmClockWorking = pygame.image.load('src/Icon/Bottom_ClockWorking.png')
 
         self.__imgPill = pygame.image.load('src/Icon/Bottom_Pill.png')
-        self.__imgPillHalo = pygame.image.load('src/Icon/Bottom_PillHalo.png')
-        self.__imgPillNotTaken = pygame.image.load('src/Icon/Bottom_PillNotTaken.png')
+        self.__imgPillSelected = pygame.image.load('src/Icon/Bottom_PillSelected.png')
 
         self.__imgWeather = pygame.image.load('src/Icon/Bottom_Weather.png')
-        self.__imgWeatherHalo = pygame.image.load('src/Icon/Bottom_WeatherHalo.png')
+        self.__imgWeatherSelected = pygame.image.load('src/Icon/Bottom_WeatherSelected.png')
 
     def OnPaint(self):
         pygame.draw.line(self.__canvas, (96, 96, 96), (0, 400), (800, 400), 2)
@@ -39,28 +37,25 @@ class BottomGadgetsItem:
             IScreen.PaintShadowTextOffset(self.__canvas, self.__font, _temperatureContent, (255, 255, 128), (6, 403), 2)
 
         # Print alarm clock related icon
-        _location = (6, 466)
+        _location = (2, 462)
         if CourtScreen.screenType == ScreenType.AlarmClock:
-            self.__canvas.blit(self.__imgAlarmClockHalo, (_location[0] - 4, _location[1] - 4))
-        if AlarmClockScreen.IsCounting():
-            if AlarmClockScreen.IsAboutToEnd() and TimeScreen.timeSecond % 2 == 0:
-                self.__canvas.blit(self.__imgAlarmClockWarning, _location)
-            else:
-                self.__canvas.blit(self.__imgAlarmClockWorking, _location)
+            self.__canvas.blit(self.__imgAlarmClockSelected, (_location[0], _location[1]))
         else:
-            self.__canvas.blit(self.__imgAlarmClock, _location)
+            if AlarmClockScreen.IsCounting():
+                self.__canvas.blit(self.__imgAlarmClockWorking, _location)
+            else:
+                self.__canvas.blit(self.__imgAlarmClock, _location)
 
         # Print pill related icon
         _location = (_location[0] + 132, _location[1])
         if CourtScreen.screenType == ScreenType.PillReminder:
-            self.__canvas.blit(self.__imgPillHalo, (_location[0] - 4, _location[1] - 4))
-        if PillReminderScreen.IsNotTakenToday():
-            self.__canvas.blit(self.__imgPillNotTaken, _location)
+            self.__canvas.blit(self.__imgPillSelected, (_location[0], _location[1]))
         else:
             self.__canvas.blit(self.__imgPill, _location)
 
         # Print weather related icon
         _location = (_location[0] + 132, _location[1])
         if CourtScreen.screenType == ScreenType.Weather:
-            self.__canvas.blit(self.__imgWeatherHalo, (_location[0] - 4, _location[1] - 4))
-        self.__canvas.blit(self.__imgWeather, _location)
+            self.__canvas.blit(self.__imgWeatherSelected, (_location[0], _location[1]))
+        else:
+            self.__canvas.blit(self.__imgWeather, _location)

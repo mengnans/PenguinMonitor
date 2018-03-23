@@ -1,2 +1,2 @@
 cd Python/PenguinMonitor
-python3 MyMonitor.py
+python3 Program.py

@@ -1,0 +1,4 @@
+2018-3-23 13:29:06
+   Music volume increased
+   Func key supported
+   Changed bottom icon to new style
