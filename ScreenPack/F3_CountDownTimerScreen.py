@@ -124,11 +124,3 @@ class CountDownTimerScreen(IScreen):
         _recText = _renderText.get_rect()
         _locationX = 430 + (370 - (_recText[2] - 17)) / 2
         IScreen.PaintShadowText(self.__canvas, self.__font, argRightContent, (255, 255, 128), (_locationX, -17))
-
-    @staticmethod
-    def IsCounting():
-        return CountDownTimerScreen.__isCounting
-
-    @staticmethod
-    def IsAboutToEnd():
-        return CountDownTimerScreen.__isAboutToEnd

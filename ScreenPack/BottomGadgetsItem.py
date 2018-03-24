@@ -17,7 +17,9 @@ class BottomGadgetsItem:
 
         self.__imgAlarmClock = pygame.image.load('src/Icon/Bottom_Clock.png')
         self.__imgAlarmClockSelected = pygame.image.load('src/Icon/Bottom_ClockSelected.png')
-        self.__imgAlarmClockWorking = pygame.image.load('src/Icon/Bottom_ClockWorking.png')
+
+        self.__imgCountDown = pygame.image.load('src/Icon/Bottom_CountDown.png')
+        self.__imgCountDownSelected = pygame.image.load('src/Icon/Bottom_CountDownSelected.png')
 
         self.__imgPill = pygame.image.load('src/Icon/Bottom_Pill.png')
         self.__imgPillSelected = pygame.image.load('src/Icon/Bottom_PillSelected.png')
@@ -41,10 +43,14 @@ class BottomGadgetsItem:
         if CourtScreen.screenType == ScreenType.AlarmClock:
             self.__canvas.blit(self.__imgAlarmClockSelected, (_location[0], _location[1]))
         else:
-            if AlarmClockScreen.IsCounting():
-                self.__canvas.blit(self.__imgAlarmClockWorking, _location)
-            else:
-                self.__canvas.blit(self.__imgAlarmClock, _location)
+            self.__canvas.blit(self.__imgAlarmClock, _location)
+
+        # Print pill related icon
+        _location = (_location[0] + 132, _location[1])
+        if CourtScreen.screenType == ScreenType.CountDownTimer:
+            self.__canvas.blit(self.__imgCountDownSelected, (_location[0], _location[1]))
+        else:
+            self.__canvas.blit(self.__imgCountDown, _location)
 
         # Print pill related icon
         _location = (_location[0] + 132, _location[1])
