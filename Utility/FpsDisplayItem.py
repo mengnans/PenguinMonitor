@@ -7,7 +7,7 @@ from DataPack.Decorator import OnDebug
 
 class FpsDisplayItem:
 
-    @OnDebug
+    # @OnDebug
     def __init__(self):
         self.__fps = 0
         self.__fpsTick = 0
@@ -17,7 +17,7 @@ class FpsDisplayItem:
         self.__canvas = pygame.display.get_surface()
         self.__font = pygame.font.Font("src/Font/Inconsolata.otf", 18)
 
-    @OnDebug
+    # @OnDebug
     def Tick(self):
         self.__fpsTick = self.__fpsTick + 1
         if int(time.time()) != self.__second:

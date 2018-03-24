@@ -47,6 +47,7 @@ class EngineLoop:
             pass
 
         if _isPaint:
+            IScreen.isForceUpdate = False
             EngineLoop.__isPaint = False
             self.OnPaint()
 
