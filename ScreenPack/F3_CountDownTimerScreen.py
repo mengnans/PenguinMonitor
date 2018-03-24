@@ -43,7 +43,7 @@ class CountDownTimerScreen(IScreen):
             SoundHelper.PlaySpeech("AlarmClockIsAboutToEnd")
         # time's up
         if _timeSecondDiff <= 0:
-            SoundHelper.PlaySound("src/Music/AlarmMusic9.wav")
+            SoundHelper.PlaySound("AlarmMusic9")
             CountDownTimerScreen.__isAboutToEnd = False
             CountDownTimerScreen.__isCounting = False
             self.__alarmTimeString = '0000'

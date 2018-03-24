@@ -48,6 +48,15 @@ class PillReminderScreen(IScreen):
             self.WriteToFile()
             IScreen.ForceUpdate()
 
+    def OnUpdatePerSecond(self):
+        pass
+
+    def OnUpdatePerMinute(self):
+        _time = time.localtime()
+        if _time.tm_hour is 21 and _time.tm_min is 0:
+            if PillReminderScreen.__isColinTaken is False or PillReminderScreen.__isStoneTaken is False:
+                SoundHelper.PlaySound("AlarmMusic9")
+
     def OnPaint(self):
         if PillReminderScreen.__isColinTaken:
             self.__canvas.blit(self.__imgPillTaken, (4, 4))

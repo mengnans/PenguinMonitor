@@ -24,7 +24,7 @@ class KeyboardHelper:
         return KeyboardHelper.__key[argKey] and not KeyboardHelper.__keyPro[argKey]
 
     @staticmethod
-    def IsReleaseing(argKey):
+    def IsReleasing(argKey):
         return not KeyboardHelper.__key[argKey]
 
     @staticmethod

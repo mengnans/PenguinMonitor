@@ -9,7 +9,7 @@ class SoundHelper:
 
     @staticmethod
     def PlaySound(argMusicFileAddress):
-        _sound = pygame.mixer.Sound(argMusicFileAddress)
+        _sound = pygame.mixer.Sound("src/Music/" + argMusicFileAddress + ".wav")
         _sound.play()
 
     @staticmethod
