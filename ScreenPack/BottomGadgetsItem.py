@@ -18,8 +18,8 @@ class BottomGadgetsItem:
         self.__imgAlarmClock = pygame.image.load('src/Icon/Bottom_Clock.png')
         self.__imgAlarmClockSelected = pygame.image.load('src/Icon/Bottom_ClockSelected.png')
 
-        self.__imgCountDown = pygame.image.load('src/Icon/Bottom_CountDown.png')
-        self.__imgCountDownSelected = pygame.image.load('src/Icon/Bottom_CountDownSelected.png')
+        self.__imgCountDown = pygame.image.load('src/Icon/Bottom_Countdown.png')
+        self.__imgCountDownSelected = pygame.image.load('src/Icon/Bottom_CountdownSelected.png')
 
         self.__imgPill = pygame.image.load('src/Icon/Bottom_Pill.png')
         self.__imgPillSelected = pygame.image.load('src/Icon/Bottom_PillSelected.png')

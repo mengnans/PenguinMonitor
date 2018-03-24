@@ -86,7 +86,7 @@ class CountDownTimerScreen(IScreen):
         if CountDownTimerScreen.__isCounting is False:
             _leftContent = self.__alarmTimeString[:2]
             _rightContent = self.__alarmTimeString[2:]
-            self.__PaintTime(_leftContent, _rightContent, (255, 255, 0))
+            self.__PaintTime(_leftContent, _rightContent, (255, 255, 64))
         else:
             _time = time.localtime()
             _timeHourDiff = CountDownTimerScreen.__timeHour - _time.tm_hour
@@ -100,18 +100,18 @@ class CountDownTimerScreen(IScreen):
                 _leftContent = int(_timeSecondDiff / 3600)
                 _timeSecondDiff %= 3600
                 _rightContent = int(_timeSecondDiff / 60)
-                self.__PaintTime('%02d' % _leftContent, '%02d' % _rightContent, (255, 255, 0))
+                self.__PaintTime('%02d' % _leftContent, '%02d' % _rightContent, (255, 255, 64))
             else:
                 _leftContent = int(_timeSecondDiff / 60)
                 _rightContent = _timeSecondDiff % 60
-                self.__PaintTime('%02d' % _leftContent, '%02d' % _rightContent, (255, 165, 165))
+                self.__PaintTime('%02d' % _leftContent, '%02d' % _rightContent, (255, 96, 96))
 
     def __PaintTime(self, argLeftContent, argRightContent, argRightContentColor):
         # Draw hour value
         _renderText = self.__font.render(argLeftContent, True, (255, 255, 255))
         _recText = _renderText.get_rect()
         _locationX = (370 - (_recText[2] - 17)) / 2
-        IScreen.PaintShadowText(self.__canvas, self.__font, argLeftContent, (255, 255, 128), (_locationX, -17))
+        IScreen.PaintShadowText(self.__canvas, self.__font, argLeftContent, (255, 255, 64), (_locationX, -17))
 
         # Draw colon
         if self.totalSecondDiff % 2 == 0:
@@ -123,4 +123,4 @@ class CountDownTimerScreen(IScreen):
         _renderText = self.__font.render(argRightContent, True, (255, 255, 255))
         _recText = _renderText.get_rect()
         _locationX = 430 + (370 - (_recText[2] - 17)) / 2
-        IScreen.PaintShadowText(self.__canvas, self.__font, argRightContent, (255, 255, 128), (_locationX, -17))
+        IScreen.PaintShadowText(self.__canvas, self.__font, argRightContent, argRightContentColor, (_locationX, -17))
