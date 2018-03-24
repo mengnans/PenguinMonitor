@@ -20,7 +20,7 @@ class AlarmClockScreen(IScreen):
         self.totalSecondDiff = 0
 
     def OnUpdate(self):
-        if AlarmClockScreen.__isCounting == False:
+        if AlarmClockScreen.__isCounting is False:
             self.__OnKeyDownSelecting()
         elif KeyboardHelper.IsPress(pygame.K_ESCAPE):
             SoundHelper.PlaySpeech("AlarmClockStopped")
@@ -45,7 +45,8 @@ class AlarmClockScreen(IScreen):
             self.__alarmTimeString = '0000'
             IScreen.ForceUpdate()
 
-        if (KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN)) and self.__alarmTimeString.__eq__('0000') == False:
+        if (KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN)) \
+                and self.__alarmTimeString.__eq__('0000') is False:
             AlarmClockScreen.__isCounting = True
             SoundHelper.PlaySpeech("AlarmClockStarted")
             AlarmClockScreen.__timeHour = int(self.__alarmTimeString[:2])
@@ -87,7 +88,7 @@ class AlarmClockScreen(IScreen):
                 self.__PaintTime('%02d' % _leftContent, '%02d' % _rightContent, (255, 165, 165))
 
     def __PaintTime(self, argLeftContent, argRightContent, argRightContentColor):
-        # Draw hour value
+        # Draw left value
         _renderText = self.__font.render(argLeftContent, True, (255, 255, 255))
         _recText = _renderText.get_rect()
         _locationX = (370 - (_recText[2] - 17)) / 2
@@ -99,7 +100,7 @@ class AlarmClockScreen(IScreen):
         else:
             IScreen.PaintShadowText(self.__canvas, self.__font, ":", (64, 64, 64), (370, -93))
 
-        # Draw minute value
+        # Draw right value
         _renderText = self.__font.render(argRightContent, True, (255, 255, 255))
         _recText = _renderText.get_rect()
         _locationX = 430 + (370 - (_recText[2] - 17)) / 2

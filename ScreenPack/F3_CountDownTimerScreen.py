@@ -20,7 +20,7 @@ class CountDownTimerScreen(IScreen):
         self.totalSecondDiff = 0
 
     def OnUpdate(self):
-        if CountDownTimerScreen.__isCounting == False:
+        if CountDownTimerScreen.__isCounting is False:
             self.__OnKeyDownSelecting()
         elif KeyboardHelper.IsPress(pygame.K_ESCAPE):
             SoundHelper.PlaySpeech("AlarmClockStopped")
@@ -29,7 +29,7 @@ class CountDownTimerScreen(IScreen):
             IScreen.ForceUpdate()
 
     def OnUpdatePerSecond(self):
-        if CountDownTimerScreen.__isCounting == False:
+        if CountDownTimerScreen.__isCounting is False:
             return
         _time = time.localtime()
         _timeHourDiff = CountDownTimerScreen.__timeHour - _time.tm_hour
@@ -37,9 +37,11 @@ class CountDownTimerScreen(IScreen):
         _timeSecondDiff = CountDownTimerScreen.__timeSecond - _time.tm_sec
         _timeSecondDiff += _timeMinuteDiff * 60
         _timeSecondDiff += _timeHourDiff * 60 * 60
+        # time is running out
         if _timeSecondDiff <= 60 and CountDownTimerScreen.__isAboutToEnd is False:
             CountDownTimerScreen.__isAboutToEnd = True
             SoundHelper.PlaySpeech("AlarmClockIsAboutToEnd")
+        # time's up
         if _timeSecondDiff <= 0:
             SoundHelper.PlaySound("src/Music/AlarmMusic9.wav")
             CountDownTimerScreen.__isAboutToEnd = False
@@ -62,7 +64,8 @@ class CountDownTimerScreen(IScreen):
             self.__alarmTimeString = '0000'
             IScreen.ForceUpdate()
 
-        if (KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN)) and self.__alarmTimeString.__eq__('0000') == False:
+        if (KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN)) and \
+                self.__alarmTimeString.__eq__('0000') == False:
             CountDownTimerScreen.__isCounting = True
             SoundHelper.PlaySpeech("AlarmClockStarted")
             CountDownTimerScreen.__timeHour = int(self.__alarmTimeString[:2])
