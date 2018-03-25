@@ -43,15 +43,12 @@ class CountDownTimerScreen(IScreen):
             SoundHelper.PlaySpeech("AlarmClockIsAboutToEnd")
         # time's up
         if _timeSecondDiff <= 0:
-            SoundHelper.PlaySound("AlarmMusic9")
+            SoundHelper.PlayMusic("AlarmMusic9")
             CountDownTimerScreen.__isAboutToEnd = False
             CountDownTimerScreen.__isCounting = False
             self.__alarmTimeString = '0000'
             IScreen.ForceUpdate()
         self.totalSecondDiff = _timeSecondDiff
-
-    def OnUpdatePerMinute(self):
-        pass
 
     def __OnKeyDownSelecting(self):
         for _num in range(0, 10):
@@ -110,17 +107,17 @@ class CountDownTimerScreen(IScreen):
         # Draw hour value
         _renderText = self.__font.render(argLeftContent, True, (255, 255, 255))
         _recText = _renderText.get_rect()
-        _locationX = (370 - (_recText[2] - 17)) / 2
+        _locationX = (381 - (_recText[2] - 17)) / 2
         IScreen.PaintShadowText(self.__canvas, self.__font, argLeftContent, (255, 255, 64), (_locationX, -17))
 
         # Draw colon
         if self.totalSecondDiff % 2 == 0:
-            IScreen.PaintShadowText(self.__canvas, self.__font, ":", (255, 255, 128), (370, -93))
+            IScreen.PaintShadowText(self.__canvas, self.__font, ":", (255, 255, 128), (381, -93))
         else:
-            IScreen.PaintShadowText(self.__canvas, self.__font, ":", (64, 64, 64), (370, -93))
+            IScreen.PaintShadowText(self.__canvas, self.__font, ":", (64, 64, 64), (381, -93))
 
         # Draw minute value
         _renderText = self.__font.render(argRightContent, True, (255, 255, 255))
         _recText = _renderText.get_rect()
-        _locationX = 430 + (370 - (_recText[2] - 17)) / 2
+        _locationX = 419 + (381 - (_recText[2] - 17)) / 2
         IScreen.PaintShadowText(self.__canvas, self.__font, argRightContent, argRightContentColor, (_locationX, -17))

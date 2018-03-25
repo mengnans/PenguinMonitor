@@ -1,7 +1,7 @@
 import time
 import pygame
 
-from DataPack.CourtScreen import CourtScreen
+from DataPack.Court import Court
 from DataPack.Enum_ScreenType import ScreenType
 from ScreenPack.IScreen import IScreen
 from Utility.FpsDisplayItem import FpsDisplayItem
@@ -18,32 +18,32 @@ class EngineLoop:
         _time = time.localtime()
         _isPaint = IScreen.isForceUpdate
 
-        CourtScreen.screenTimeItem.OnUpdate()
-        CourtScreen.screenAlarmClockItem.OnUpdate()
-        CourtScreen.screenCountdownTimerItem.OnUpdate()
-        CourtScreen.screenPillReminderItem.OnUpdate()
-        CourtScreen.screenWeatherItem.OnUpdate()
-        CourtScreen.screenPiInfoItem.OnUpdate()
+        Court.screenTimeItem.OnUpdate()
+        Court.screenAlarmClockItem.OnUpdate()
+        Court.screenCountdownTimerItem.OnUpdate()
+        Court.screenPillReminderItem.OnUpdate()
+        Court.screenWeatherItem.OnUpdate()
+        Court.screenPiInfoItem.OnUpdate()
 
         if self.__lastTickSecond != _time.tm_sec:
             self.__lastTickSecond = _time.tm_sec
-            CourtScreen.screenTimeItem.OnUpdatePerSecond()
-            CourtScreen.screenAlarmClockItem.OnUpdatePerSecond()
-            CourtScreen.screenCountdownTimerItem.OnUpdatePerSecond()
-            CourtScreen.screenPillReminderItem.OnUpdatePerSecond()
-            CourtScreen.screenWeatherItem.OnUpdatePerSecond()
-            CourtScreen.screenPiInfoItem.OnUpdatePerSecond()
+            Court.screenTimeItem.OnUpdatePerSecond()
+            Court.screenAlarmClockItem.OnUpdatePerSecond()
+            Court.screenCountdownTimerItem.OnUpdatePerSecond()
+            Court.screenPillReminderItem.OnUpdatePerSecond()
+            Court.screenWeatherItem.OnUpdatePerSecond()
+            Court.screenPiInfoItem.OnUpdatePerSecond()
             _isPaint = True
             pass
 
         if self.__lastTickMinute != _time.tm_min:
             self.__lastTickMinute = _time.tm_min
-            CourtScreen.screenTimeItem.OnUpdatePerMinute()
-            CourtScreen.screenAlarmClockItem.OnUpdatePerMinute()
-            CourtScreen.screenCountdownTimerItem.OnUpdatePerMinute()
-            CourtScreen.screenPillReminderItem.OnUpdatePerMinute()
-            CourtScreen.screenWeatherItem.OnUpdatePerMinute()
-            CourtScreen.screenPiInfoItem.OnUpdatePerMinute()
+            Court.screenTimeItem.OnUpdatePerMinute()
+            Court.screenAlarmClockItem.OnUpdatePerMinute()
+            Court.screenCountdownTimerItem.OnUpdatePerMinute()
+            Court.screenPillReminderItem.OnUpdatePerMinute()
+            Court.screenWeatherItem.OnUpdatePerMinute()
+            Court.screenPiInfoItem.OnUpdatePerMinute()
             pass
 
         if _isPaint:
@@ -53,17 +53,17 @@ class EngineLoop:
 
     def OnPaint(self):
         pygame.display.get_surface().fill((0, 0, 0))
-        if CourtScreen.screenType == ScreenType.Time:
-            CourtScreen.screenTimeItem.OnPaint()
-        if CourtScreen.screenType == ScreenType.AlarmClock:
-            CourtScreen.screenAlarmClockItem.OnPaint()
-        if CourtScreen.screenType == ScreenType.CountDownTimer:
-            CourtScreen.screenCountdownTimerItem.OnPaint()
-        if CourtScreen.screenType == ScreenType.PillReminder:
-            CourtScreen.screenPillReminderItem.OnPaint()
-        if CourtScreen.screenType == ScreenType.Weather:
-            CourtScreen.screenWeatherItem.OnPaint()
-        if CourtScreen.screenType == ScreenType.PiInfo:
-            CourtScreen.screenPiInfoItem.OnPaint()
-        CourtScreen.bottomGadget.OnPaint()
+        if Court.screenType == ScreenType.Time:
+            Court.screenTimeItem.OnPaint()
+        if Court.screenType == ScreenType.AlarmClock:
+            Court.screenAlarmClockItem.OnPaint()
+        if Court.screenType == ScreenType.CountDownTimer:
+            Court.screenCountdownTimerItem.OnPaint()
+        if Court.screenType == ScreenType.PillReminder:
+            Court.screenPillReminderItem.OnPaint()
+        if Court.screenType == ScreenType.Weather:
+            Court.screenWeatherItem.OnPaint()
+        if Court.screenType == ScreenType.PiInfo:
+            Court.screenPiInfoItem.OnPaint()
+        Court.bottomGadget.OnPaint()
         self.__fpsItem.Tick()

@@ -1,7 +1,8 @@
-import pygame
-import time
+import json
 
-from DataPack.CourtScreen import CourtScreen
+import pygame
+
+from DataPack.Court import Court
 from DataPack.DataProgram import DataProgram
 from DataPack.Enum_ScreenType import ScreenType
 from EnginePack.EngineKeybord import EngineKeyboard
@@ -9,13 +10,11 @@ from EnginePack.EngineLoop import EngineLoop
 from ScreenPack.BottomGadgetsItem import BottomGadgetsItem
 from ScreenPack.F3_CountDownTimerScreen import CountDownTimerScreen
 from ScreenPack.F9_PiInfoScreen import PiInfoScreen
-from ScreenPack.IScreen import IScreen
 from ScreenPack.F1_TimeScreen import TimeScreen
 from ScreenPack.F2_AlarmClockScreen import AlarmClockScreen
 from ScreenPack.F4_PillReminderScreen import PillReminderScreen
 from ScreenPack.F5_WeatherScreen import WeatherScreen
-from Utility.FpsDisplayItem import FpsDisplayItem
-from Utility.InternetHelper import InternetHelper
+from Utility.ConfigHelper import ConfigHelper
 from Utility.KeyboardHelper import KeyboardHelper
 from Utility.SoundHelper import SoundHelper
 
@@ -32,21 +31,28 @@ class MyMonitor:
             self.__screen = pygame.display.set_mode((800, 600))
         else:
             self.__screen = pygame.display.set_mode((800, 600), pygame.FULLSCREEN)
+        ConfigHelper.LoadFromFile()
+        print(Court.configItemPill["date"])
         self.__InitScreens()
         self.__gameLoopItem = EngineLoop()
         self.__gameKeyboard = EngineKeyboard()
         MyMonitor.__GameLoop(self)
 
-    def __InitScreens(self):
+    @staticmethod
+    def __InitialData():
+        print(json.dumps(Court.configItem))
+
+    @staticmethod
+    def __InitScreens():
         PillReminderScreen.InitDataInfo()
-        CourtScreen.screenTimeItem = TimeScreen()
-        CourtScreen.screenAlarmClockItem = AlarmClockScreen()
-        CourtScreen.screenCountdownTimerItem = CountDownTimerScreen()
-        CourtScreen.screenPillReminderItem = PillReminderScreen()
-        CourtScreen.screenWeatherItem = WeatherScreen()
-        CourtScreen.screenPiInfoItem = PiInfoScreen()
-        CourtScreen.screenType = ScreenType.Time
-        CourtScreen.bottomGadget = BottomGadgetsItem()
+        Court.screenTimeItem = TimeScreen()
+        Court.screenAlarmClockItem = AlarmClockScreen()
+        Court.screenCountdownTimerItem = CountDownTimerScreen()
+        Court.screenPillReminderItem = PillReminderScreen()
+        Court.screenWeatherItem = WeatherScreen()
+        Court.screenPiInfoItem = PiInfoScreen()
+        Court.screenType = ScreenType.Time
+        Court.bottomGadget = BottomGadgetsItem()
 
     def __GameLoop(self):
         while True:
