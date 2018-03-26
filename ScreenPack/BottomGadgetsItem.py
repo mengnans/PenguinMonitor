@@ -1,12 +1,9 @@
 import pygame
 
-from DataPack.CourtScreen import CourtScreen
+from DataPack.Court import Court
 from DataPack.Enum_ScreenType import ScreenType
-from ScreenPack.F2_AlarmClockScreen import AlarmClockScreen
+from ScreenPack.F9_PiInfoScreen import PiInfoScreen
 from ScreenPack.IScreen import IScreen
-from ScreenPack.F1_TimeScreen import TimeScreen
-from ScreenPack.F4_PillReminderScreen import PillReminderScreen
-from Utility.SystemInfoHelper import SystemInfoHelper
 
 
 class BottomGadgetsItem:
@@ -17,7 +14,9 @@ class BottomGadgetsItem:
 
         self.__imgAlarmClock = pygame.image.load('src/Icon/Bottom_Clock.png')
         self.__imgAlarmClockSelected = pygame.image.load('src/Icon/Bottom_ClockSelected.png')
-        self.__imgAlarmClockWorking = pygame.image.load('src/Icon/Bottom_ClockWorking.png')
+
+        self.__imgCountDown = pygame.image.load('src/Icon/Bottom_Countdown.png')
+        self.__imgCountDownSelected = pygame.image.load('src/Icon/Bottom_CountdownSelected.png')
 
         self.__imgPill = pygame.image.load('src/Icon/Bottom_Pill.png')
         self.__imgPillSelected = pygame.image.load('src/Icon/Bottom_PillSelected.png')
@@ -26,11 +25,11 @@ class BottomGadgetsItem:
         self.__imgWeatherSelected = pygame.image.load('src/Icon/Bottom_WeatherSelected.png')
 
     def OnPaint(self):
-        pygame.draw.line(self.__canvas, (96, 96, 96), (0, 400), (800, 400), 2)
+        pygame.draw.line(self.__canvas, (192, 192, 192), (0, 400), (800, 400), 2)
 
         # Print current temperature
-        _temperature = SystemInfoHelper.GetTemperature()
-        _temperatureContent = str(_temperature) + "'C"
+        _temperature = PiInfoScreen.GetTemperatureAverage()
+        _temperatureContent = '%.2f' % _temperature + "'C"
         if _temperature <= 60:
             IScreen.PaintShadowTextOffset(self.__canvas, self.__font, _temperatureContent, (255, 255, 224), (6, 403), 2)
         else:
@@ -38,24 +37,28 @@ class BottomGadgetsItem:
 
         # Print alarm clock related icon
         _location = (2, 462)
-        if CourtScreen.screenType == ScreenType.AlarmClock:
+        if Court.screenType == ScreenType.AlarmClock:
             self.__canvas.blit(self.__imgAlarmClockSelected, (_location[0], _location[1]))
         else:
-            if AlarmClockScreen.IsCounting():
-                self.__canvas.blit(self.__imgAlarmClockWorking, _location)
-            else:
-                self.__canvas.blit(self.__imgAlarmClock, _location)
+            self.__canvas.blit(self.__imgAlarmClock, _location)
 
         # Print pill related icon
         _location = (_location[0] + 132, _location[1])
-        if CourtScreen.screenType == ScreenType.PillReminder:
+        if Court.screenType == ScreenType.CountDownTimer:
+            self.__canvas.blit(self.__imgCountDownSelected, (_location[0], _location[1]))
+        else:
+            self.__canvas.blit(self.__imgCountDown, _location)
+
+        # Print pill related icon
+        _location = (_location[0] + 132, _location[1])
+        if Court.screenType == ScreenType.PillReminder:
             self.__canvas.blit(self.__imgPillSelected, (_location[0], _location[1]))
         else:
             self.__canvas.blit(self.__imgPill, _location)
 
         # Print weather related icon
         _location = (_location[0] + 132, _location[1])
-        if CourtScreen.screenType == ScreenType.Weather:
+        if Court.screenType == ScreenType.Weather:
             self.__canvas.blit(self.__imgWeatherSelected, (_location[0], _location[1]))
         else:
             self.__canvas.blit(self.__imgWeather, _location)
