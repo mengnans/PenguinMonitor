@@ -9,34 +9,26 @@ class WeatherScreen(IScreen):
 
     def __init__(self):
         self.__canvas = pygame.display.get_surface()
-        weather = Weather(unit=Unit.CELSIUS)
-        lookup = weather.lookup(560743)
-        condition = lookup.condition()
-        print(condition.text())
-        location = weather.lookup_by_location('melbourne')
-        location.print_obj()
-        print(location.wind())
-        print(location.atmosphere())
-        print(location.astronomy())
-        print(location.image())
-        print(location.condition())
-        print(location.description())
-        print(location.forecast())
-        print(location.units())
-        print(location.title())
-
-
+        _weather = Weather(unit=Unit.CELSIUS)
+        self.__location = _weather.lookup_by_location('melbourne')
+        self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 540)
+        self.__currentWeather = 0
 
     def OnUpdate(self):
         pass
-        # _imagerect = self._image
-        # self.__canvas.blit(self._image,_imagerect)
 
     def OnUpdatePerSecond(self):
         pass
 
     def OnUpdatePerMinute(self):
+        # self.__currentWeather = self.__location.condition().temp() + '\'C'
+        self.__currentWeather = self.__location.condition().temp() + '\''
         pass
 
     def OnPaint(self):
-        pass
+        # Draw temp value
+        _renderText = self.__font.render(self.__currentWeather, True, (255, 255, 255))
+        _recText = _renderText.get_rect()
+        _locationX = 419 + (381 - (_recText[2] - 17)) / 2
+        IScreen.PaintShadowText(self.__canvas, self.__font, self.__currentWeather, (255, 255, 255), (_locationX, -17))
+
