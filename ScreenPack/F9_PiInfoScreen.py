@@ -15,9 +15,6 @@ class PiInfoScreen(IScreen):
         for i in range(0, 5):
             PiInfoScreen.__blkTemperature[i] = _temperatureInit
 
-        self.__canvas = pygame.display.get_surface()
-        self.__font = pygame.font.Font("src/Font/Inconsolata.otf", 80)
-
     def OnUpdate(self):
         pass
 
@@ -29,9 +26,6 @@ class PiInfoScreen(IScreen):
         pass
 
     def OnPaint(self):
-        for i in range(0, 5):
-            self.__canvas.blit(self.__font.render(str(PiInfoScreen.__blkTemperature[i]), True, (255, 255, 255)),
-                               (2, -2 + 80 * i))
         pass
 
     @staticmethod

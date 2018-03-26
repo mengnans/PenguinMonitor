@@ -29,7 +29,7 @@ class BottomGadgetsItem:
 
         # Print current temperature
         _temperature = PiInfoScreen.GetTemperatureAverage()
-        _temperatureContent = str(_temperature) + "'C"
+        _temperatureContent = '%.2f' % _temperature + "'C"
         if _temperature <= 60:
             IScreen.PaintShadowTextOffset(self.__canvas, self.__font, _temperatureContent, (255, 255, 224), (6, 403), 2)
         else:
