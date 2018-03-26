@@ -24,15 +24,14 @@ class MyMonitor:
     def __init__(self):
         pygame.init()
 
+        ConfigHelper.LoadFromFile()
         KeyboardHelper.Initial()
         SoundHelper.SetInitial()
 
-        if DataProgram.IsDebugMode == True:
+        if DataProgram.IsDebugMode is True:
             self.__screen = pygame.display.set_mode((800, 600))
         else:
             self.__screen = pygame.display.set_mode((800, 600), pygame.FULLSCREEN)
-        ConfigHelper.LoadFromFile()
-        print(Court.configItemPill["date"])
         self.__InitScreens()
         self.__gameLoopItem = EngineLoop()
         self.__gameKeyboard = EngineKeyboard()
@@ -44,7 +43,6 @@ class MyMonitor:
 
     @staticmethod
     def __InitScreens():
-        PillReminderScreen.InitDataInfo()
         Court.screenTimeItem = TimeScreen()
         Court.screenAlarmClockItem = AlarmClockScreen()
         Court.screenCountdownTimerItem = CountDownTimerScreen()
