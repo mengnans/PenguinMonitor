@@ -51,10 +51,10 @@ class AlarmClockScreen(IScreen):
             self.__UpdateData()
 
     def __KeyActionNumber(self):
-        for _num in range(0, 10):
-            if KeyboardHelper.IsPress(pygame.K_KP0 + _num) | KeyboardHelper.IsPress(pygame.K_0 + _num):
+        for i in range(0, 10):
+            if KeyboardHelper.IsPress(pygame.K_KP0 + i) | KeyboardHelper.IsPress(pygame.K_0 + i):
                 _srcContent = self.__timeData[self.__selectIndex]
-                _dstContent = _srcContent[1:2] + _srcContent[3:4] + ":" + _srcContent[4:5] + str(_num)
+                _dstContent = _srcContent[1:2] + _srcContent[3:4] + ":" + _srcContent[4:5] + str(i)
                 self.__timeData[self.__selectIndex] = _dstContent
                 self.__UpdateData()
 

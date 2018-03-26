@@ -2,11 +2,8 @@ import pygame
 
 from DataPack.Court import Court
 from DataPack.Enum_ScreenType import ScreenType
-from ScreenPack.F2_AlarmClockScreen import AlarmClockScreen
+from ScreenPack.F9_PiInfoScreen import PiInfoScreen
 from ScreenPack.IScreen import IScreen
-from ScreenPack.F1_TimeScreen import TimeScreen
-from ScreenPack.F4_PillReminderScreen import PillReminderScreen
-from Utility.SystemInfoHelper import SystemInfoHelper
 
 
 class BottomGadgetsItem:
@@ -31,7 +28,7 @@ class BottomGadgetsItem:
         pygame.draw.line(self.__canvas, (192, 192, 192), (0, 400), (800, 400), 2)
 
         # Print current temperature
-        _temperature = SystemInfoHelper.GetTemperature()
+        _temperature = PiInfoScreen.GetTemperatureAverage()
         _temperatureContent = str(_temperature) + "'C"
         if _temperature <= 60:
             IScreen.PaintShadowTextOffset(self.__canvas, self.__font, _temperatureContent, (255, 255, 224), (6, 403), 2)

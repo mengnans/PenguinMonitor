@@ -36,7 +36,7 @@ class EngineKeyboard:
             Court.screenType = ScreenType.Weather
             IScreen.ForceUpdate()
         if KeyboardHelper.IsPress(pygame.K_F9):
-            Court.screenType = ScreenType.Time
+            Court.screenType = ScreenType.PiInfo
             IScreen.ForceUpdate()
 
     def __ChangeNextScreen(self):
