@@ -8,12 +8,12 @@ from DataPack.Enum_ScreenType import ScreenType
 from EnginePack.EngineKeybord import EngineKeyboard
 from EnginePack.EngineLoop import EngineLoop
 from ScreenPack.BottomGadgetsItem import BottomGadgetsItem
-from ScreenPack.F3_CountDownTimerScreen import CountDownTimerScreen
-from ScreenPack.F9_PiInfoScreen import PiInfoScreen
 from ScreenPack.F1_TimeScreen import TimeScreen
 from ScreenPack.F2_AlarmClockScreen import AlarmClockScreen
+from ScreenPack.F3_CountDownTimerScreen import CountDownTimerScreen
 from ScreenPack.F4_PillReminderScreen import PillReminderScreen
 from ScreenPack.F5_WeatherScreen import WeatherScreen
+from ScreenPack.F9_PiInfoScreen import PiInfoScreen
 from Utility.ConfigHelper import ConfigHelper
 from Utility.KeyboardHelper import KeyboardHelper
 from Utility.SoundHelper import SoundHelper
