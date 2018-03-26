@@ -1,5 +1,4 @@
 /venv
-/.idea/workspace.xml
 /ScreenPack/__pycache__
 /Utility/__pycache__
 *.pyc
