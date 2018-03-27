@@ -2,6 +2,7 @@ from ScreenPack.IScreen import IScreen
 from weather import Weather, Unit
 import pygame
 
+
 class WeatherScreen(IScreen):
     def __init__(self):
         self.__canvas = pygame.display.get_surface()
@@ -15,13 +16,10 @@ class WeatherScreen(IScreen):
 
     def OnUpdatePerSecond(self):
         # self.__currentWeather = self.__location.condition().temp() + '\'C'
-        self.__currentWeather = self.__location.condition().temp() + '\''
+        self.__currentWeather = self.__location.condition().temp() + '\'C'
 
     def OnUpdatePerMinute(self):
         pass
 
     def OnPaint(self):
-        _renderText = self.__font.render(self.__currentWeather, True, (255, 255, 255))
-        _recText = _renderText.get_rect()
-        _locationX = 419 + (381 - (_recText[2] - 17)) / 2
-        IScreen.PaintShadowText(self.__canvas, self.__font, self.__currentWeather, (255, 255, 255), (_locationX, -17))
+        IScreen.PaintShadowText(self.__canvas, self.__font, self.__currentWeather, (255, 255, 255), (10, -17))
