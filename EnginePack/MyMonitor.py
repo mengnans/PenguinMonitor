@@ -54,7 +54,7 @@ class MyMonitor:
 
     def __GameLoop(self):
         while True:
-            pygame.time.Clock().tick(DataProgram.UpdatePerSecond)
+            pygame.time.Clock().tick(24)
             self.__gameKeyboard.OnUpdate()
             self.__gameLoopItem.OnUpdate()
             self.__GameEvent()
