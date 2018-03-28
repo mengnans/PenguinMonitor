@@ -3,7 +3,7 @@ import os
 
 class DataProgram:
     IsDebugMode = True
-    UpdatePerSecond = 24
+    UpdatePerSecond = 60
 
     @staticmethod
     def Init():

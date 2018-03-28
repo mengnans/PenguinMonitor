@@ -34,7 +34,7 @@ class PillReminderScreen(IScreen):
 
     # <editor-fold desc="Key Related Logic">
 
-    def OnUpdate(self):
+    def OnKeyboardUpdate(self):
         if KeyboardHelper.IsPress(pygame.K_c):
             self.__isColinTaken = not self.__isColinTaken
             self.__UpdateData()

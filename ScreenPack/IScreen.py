@@ -5,7 +5,7 @@ class IScreen:
     isForceUpdate = False
 
     @abstractmethod
-    def OnUpdate(self):
+    def OnKeyboardUpdate(self):
         pass
 
     @abstractmethod

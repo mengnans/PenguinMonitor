@@ -11,7 +11,7 @@ class WeatherScreen(IScreen):
         self.__font = pygame.font.Font("src/Font/Reckoner.ttf", 540)
         self.__currentWeather = 0
 
-    def OnUpdate(self):
+    def OnKeyboardUpdate(self):
         pass
 
     def OnUpdatePerSecond(self):

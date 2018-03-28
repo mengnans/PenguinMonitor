@@ -18,7 +18,7 @@ class TimeScreen(IScreen):
 
     # <editor-fold desc="Update Logic">
 
-    def OnUpdate(self):
+    def OnKeyboardUpdate(self):
         pass
 
     def OnUpdatePerSecond(self):

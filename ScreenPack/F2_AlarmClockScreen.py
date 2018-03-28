@@ -32,7 +32,7 @@ class AlarmClockScreen(IScreen):
 
     # <editor-fold desc="Key Related Logic">
 
-    def OnUpdate(self):
+    def OnKeyboardUpdate(self):
         self.__KeyActionArrow()
         self.__KeyActionNumber()
 

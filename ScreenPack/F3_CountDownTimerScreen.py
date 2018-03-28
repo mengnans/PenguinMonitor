@@ -7,6 +7,8 @@ from Utility.SoundHelper import SoundHelper
 
 
 class CountDownTimerScreen(IScreen):
+    # <editor-fold desc="Declaration and Initial / Constructor">
+
     __isCounting = False
     __isAboutToEnd = False
     __timeHour = 0
@@ -19,7 +21,11 @@ class CountDownTimerScreen(IScreen):
         self.__alarmTimeString = '0000'
         self.totalSecondDiff = 0
 
-    def OnUpdate(self):
+    # </editor-fold>
+
+    # <editor-fold desc="Key Related Logic">
+
+    def OnKeyboardUpdate(self):
         if CountDownTimerScreen.__isCounting is False:
             self.__OnKeyDownSelecting()
         elif KeyboardHelper.IsPress(pygame.K_ESCAPE):
@@ -27,6 +33,38 @@ class CountDownTimerScreen(IScreen):
             CountDownTimerScreen.__isCounting = False
             CountDownTimerScreen.__isAboutToEnd = False
             IScreen.ForceUpdate()
+
+    def __OnKeyDownSelecting(self):
+        for _num in range(0, 10):
+            if KeyboardHelper.IsPress(pygame.K_KP0 + _num) | KeyboardHelper.IsPress(pygame.K_0 + _num):
+                self.__alarmTimeString += str(_num)
+                self.__alarmTimeString = self.__alarmTimeString[1:]
+                IScreen.ForceUpdate()
+                break
+        if KeyboardHelper.IsPress(pygame.K_ESCAPE):
+            self.__alarmTimeString = '0000'
+            IScreen.ForceUpdate()
+
+        if (KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN)) and self.__alarmTimeString.__eq__('0000') is False:
+            CountDownTimerScreen.__isCounting = True
+            SoundHelper.PlaySpeech("AlarmClockStarted")
+            CountDownTimerScreen.__timeHour = int(self.__alarmTimeString[:2])
+            CountDownTimerScreen.__timeMinute = int(self.__alarmTimeString[2:])
+            CountDownTimerScreen.__timeSecond = 0
+            _timeMinuteDiff = 0
+            _timeMinuteDiff += CountDownTimerScreen.__timeMinute
+            _timeMinuteDiff += CountDownTimerScreen.__timeHour * 60
+            if _timeMinuteDiff <= 1:
+                CountDownTimerScreen.__isAboutToEnd = True
+            _time = time.localtime()
+            CountDownTimerScreen.__timeHour += _time.tm_hour
+            CountDownTimerScreen.__timeMinute += _time.tm_min
+            CountDownTimerScreen.__timeSecond += _time.tm_sec
+            IScreen.ForceUpdate()
+
+    # </editor-fold>
+
+    # <editor-fold desc="Update Logic">
 
     def OnUpdatePerSecond(self):
         if CountDownTimerScreen.__isCounting is False:
@@ -50,34 +88,12 @@ class CountDownTimerScreen(IScreen):
             IScreen.ForceUpdate()
         self.totalSecondDiff = _timeSecondDiff
 
-    def __OnKeyDownSelecting(self):
-        for _num in range(0, 10):
-            if KeyboardHelper.IsPress(pygame.K_KP0 + _num) | KeyboardHelper.IsPress(pygame.K_0 + _num):
-                self.__alarmTimeString += str(_num)
-                self.__alarmTimeString = self.__alarmTimeString[1:]
-                IScreen.ForceUpdate()
-                break
-        if KeyboardHelper.IsPress(pygame.K_ESCAPE):
-            self.__alarmTimeString = '0000'
-            IScreen.ForceUpdate()
+    def OnUpdatePerMinute(self):
+        pass
 
-        if (KeyboardHelper.IsPress(pygame.K_KP_ENTER) | KeyboardHelper.IsPress(pygame.K_RETURN)) and \
-                self.__alarmTimeString.__eq__('0000') == False:
-            CountDownTimerScreen.__isCounting = True
-            SoundHelper.PlaySpeech("AlarmClockStarted")
-            CountDownTimerScreen.__timeHour = int(self.__alarmTimeString[:2])
-            CountDownTimerScreen.__timeMinute = int(self.__alarmTimeString[2:])
-            CountDownTimerScreen.__timeSecond = 0
-            _timeMinuteDiff = 0
-            _timeMinuteDiff += CountDownTimerScreen.__timeMinute
-            _timeMinuteDiff += CountDownTimerScreen.__timeHour * 60
-            if _timeMinuteDiff <= 1:
-                CountDownTimerScreen.__isAboutToEnd = True
-            _time = time.localtime()
-            CountDownTimerScreen.__timeHour += _time.tm_hour
-            CountDownTimerScreen.__timeMinute += _time.tm_min
-            CountDownTimerScreen.__timeSecond += _time.tm_sec
-            IScreen.ForceUpdate()
+    # </editor-fold>
+
+    # <editor-fold desc="Paint Logic">
 
     def OnPaint(self):
         if CountDownTimerScreen.__isCounting is False:
@@ -121,3 +137,5 @@ class CountDownTimerScreen(IScreen):
         _recText = _renderText.get_rect()
         _locationX = 419 + (381 - (_recText[2] - 17)) / 2
         IScreen.PaintShadowText(self.__canvas, self.__font, argRightContent, argRightContentColor, (_locationX, -17))
+
+    # </editor-fold>

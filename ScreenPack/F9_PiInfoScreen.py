@@ -1,12 +1,12 @@
 import os
 
-import pygame
-
 from DataPack.DataProgram import DataProgram
 from ScreenPack.IScreen import IScreen
 
 
 class PiInfoScreen(IScreen):
+    # <editor-fold desc="Declaration and Initial / Constructor">
+
     __blkTemperature = [0, 0, 0, 0, 0]
 
     def __init__(self):
@@ -15,8 +15,16 @@ class PiInfoScreen(IScreen):
         for i in range(0, 5):
             PiInfoScreen.__blkTemperature[i] = _temperatureInit
 
-    def OnUpdate(self):
+    # </editor-fold>
+
+    # <editor-fold desc="Key Related Logic">
+
+    def OnKeyboardUpdate(self):
         pass
+
+    # </editor-fold>
+
+    # <editor-fold desc="Update Logic">
 
     def OnUpdatePerSecond(self):
         PiInfoScreen.__blkTemperature[self.tickIndex] = PiInfoScreen.__GetTemperatureCurrent()
@@ -25,8 +33,16 @@ class PiInfoScreen(IScreen):
     def OnUpdatePerMinute(self):
         pass
 
+    # </editor-fold>
+
+    # <editor-fold desc="Paint Logic">
+
     def OnPaint(self):
         pass
+
+    # </editor-fold>
+
+    # <editor-fold desc="Assistant Logic">
 
     @staticmethod
     def GetTemperatureAverage() -> float:
@@ -43,3 +59,5 @@ class PiInfoScreen(IScreen):
         _data = _data.replace("temp=", "")
         _data = _data.replace("'C\n", "")
         return float(_data)
+
+    # </editor-fold>
