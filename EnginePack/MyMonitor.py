@@ -38,10 +38,6 @@ class MyMonitor:
         MyMonitor.__GameLoop(self)
 
     @staticmethod
-    def __InitialData():
-        print(json.dumps(Court.configItem))
-
-    @staticmethod
     def __InitScreens():
         Court.screenTimeItem = TimeScreen()
         Court.screenAlarmClockItem = AlarmClockScreen()
@@ -57,11 +53,8 @@ class MyMonitor:
             pygame.time.Clock().tick(24)
             self.__gameKeyboard.OnUpdate()
             self.__gameLoopItem.OnUpdate()
-            self.__GameEvent()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    exit()
             pygame.display.update()
-
-    def __GameEvent(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
