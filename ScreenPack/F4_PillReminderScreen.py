@@ -62,6 +62,12 @@ class PillReminderScreen(IScreen):
         if _time.tm_hour is 21 and _time.tm_min is 0:
             if self.__isColinTaken is False or self.__isStoneTaken is False:
                 SoundHelper.PlayMusic("AlarmMusic9")
+        if _time.tm_hour is 0 and _time.tm_min < 10:
+            _currentDate = '%02d' % _time.tm_mon + '%02d' % _time.tm_mday
+            if Court.configItemPill["date"] != _currentDate:
+                Court.configItemPill["date"] = _currentDate
+                Court.configItemPill["isColinTaken"] = False
+                Court.configItemPill["isStoneTaken"] = False
 
     # </editor-fold>
 
