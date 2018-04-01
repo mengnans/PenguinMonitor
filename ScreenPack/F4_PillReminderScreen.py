@@ -18,10 +18,12 @@ class PillReminderScreen(IScreen):
         self.__imgPillTaken = pygame.image.load('src/Icon/Pill_Taken.png')
         self.__isColinTaken = None
         self.__isStoneTaken = None
+        self.__date = None
         self.__InitData()
 
     def __InitData(self):
         _time = time.localtime()
+        self.__date = _time.tm_mday
         _currentDate = '%02d' % _time.tm_mon + '%02d' % _time.tm_mday
         if Court.configItemPill["date"] != _currentDate:
             Court.configItemPill["date"] = _currentDate
@@ -62,12 +64,13 @@ class PillReminderScreen(IScreen):
         if _time.tm_hour is 21 and _time.tm_min is 0:
             if self.__isColinTaken is False or self.__isStoneTaken is False:
                 SoundHelper.PlayMusic("AlarmMusic9")
-        if _time.tm_hour is 0 and _time.tm_min < 10:
-            _currentDate = '%02d' % _time.tm_mon + '%02d' % _time.tm_mday
-            if Court.configItemPill["date"] != _currentDate:
-                Court.configItemPill["date"] = _currentDate
-                Court.configItemPill["isColinTaken"] = False
-                Court.configItemPill["isStoneTaken"] = False
+        if self.__date != _time.tm_mday:
+            self.__date = _time.tm_mday
+            Court.configItemPill["date"] = '%02d' % _time.tm_mon + '%02d' % _time.tm_mday
+            Court.configItemPill["isColinTaken"] = False
+            Court.configItemPill["isStoneTaken"] = False
+            self.__isColinTaken = Court.configItemPill["isColinTaken"]
+            self.__isStoneTaken = Court.configItemPill["isStoneTaken"]
 
     # </editor-fold>
 
