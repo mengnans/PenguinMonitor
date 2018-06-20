@@ -1,9 +1,8 @@
 class Court:
-    screenTimeItem = None
-    screenAlarmClockItem = None
+    screenTimeAnalogItem = None
+    screenTimeDigitalItem = None
     screenCountdownTimerItem = None
     screenPillReminderItem = None
-    screenWeatherItem = None
     screenPiInfoItem = None
 
     screenType = None

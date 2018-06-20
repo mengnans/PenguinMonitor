@@ -1,8 +1,8 @@
 import pygame
 
-from DataPack.Court import Court
+from Entity.Court import Court
 from DataPack.Enum_ScreenType import ScreenType
-from ScreenPack.F9_PiInfoScreen import PiInfoScreen
+from ScreenPack.F5_PiInfoScreen import PiInfoScreen
 from ScreenPack.IScreen import IScreen
 
 
@@ -37,10 +37,6 @@ class BottomGadgetsItem:
 
         # Print alarm clock related icon
         _location = (2, 462)
-        if Court.screenType == ScreenType.AlarmClock:
-            self.__canvas.blit(self.__imgAlarmClockSelected, (_location[0], _location[1]))
-        else:
-            self.__canvas.blit(self.__imgAlarmClock, _location)
 
         # Print pill related icon
         _location = (_location[0] + 132, _location[1])
@@ -55,10 +51,3 @@ class BottomGadgetsItem:
             self.__canvas.blit(self.__imgPillSelected, (_location[0], _location[1]))
         else:
             self.__canvas.blit(self.__imgPill, _location)
-
-        # Print weather related icon
-        _location = (_location[0] + 132, _location[1])
-        if Court.screenType == ScreenType.Weather:
-            self.__canvas.blit(self.__imgWeatherSelected, (_location[0], _location[1]))
-        else:
-            self.__canvas.blit(self.__imgWeather, _location)

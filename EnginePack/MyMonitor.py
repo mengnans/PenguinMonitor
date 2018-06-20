@@ -1,19 +1,16 @@
-import json
-
 import pygame
 
-from DataPack.Court import Court
+from Entity.Court import Court
 from DataPack.DataProgram import DataProgram
 from DataPack.Enum_ScreenType import ScreenType
 from EnginePack.EngineKeybord import EngineKeyboard
 from EnginePack.EngineLoop import EngineLoop
 from ScreenPack.BottomGadgetsItem import BottomGadgetsItem
-from ScreenPack.F1_TimeScreen import TimeScreen
-from ScreenPack.F2_AlarmClockScreen import AlarmClockScreen
+from ScreenPack.F1_TimeScreenAnalog import TimeScreenAnalog
+from ScreenPack.F2_TimeScreenDigital import TimeScreenDigital
 from ScreenPack.F3_CountDownTimerScreen import CountDownTimerScreen
 from ScreenPack.F4_PillReminderScreen import PillReminderScreen
-from ScreenPack.F5_WeatherScreen import WeatherScreen
-from ScreenPack.F9_PiInfoScreen import PiInfoScreen
+from ScreenPack.F5_PiInfoScreen import PiInfoScreen
 from Utility.ConfigHelper import ConfigHelper
 from Utility.KeyboardHelper import KeyboardHelper
 from Utility.SoundHelper import SoundHelper
@@ -39,13 +36,12 @@ class MyMonitor:
 
     @staticmethod
     def __InitScreens():
-        Court.screenTimeItem = TimeScreen()
-        Court.screenAlarmClockItem = AlarmClockScreen()
+        Court.screenTimeAnalogItem = TimeScreenAnalog()
+        Court.screenTimeDigitalItem = TimeScreenDigital()
         Court.screenCountdownTimerItem = CountDownTimerScreen()
         Court.screenPillReminderItem = PillReminderScreen()
-        Court.screenWeatherItem = WeatherScreen()
         Court.screenPiInfoItem = PiInfoScreen()
-        Court.screenType = ScreenType.Time
+        Court.screenType = ScreenType.TimeAnalog
         Court.bottomGadget = BottomGadgetsItem()
 
     def __GameLoop(self):

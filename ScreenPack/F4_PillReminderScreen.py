@@ -1,7 +1,7 @@
 import pygame
 import time
 
-from DataPack.Court import Court
+from Entity.Court import Court
 from ScreenPack.IScreen import IScreen
 from Utility.ConfigHelper import ConfigHelper
 from Utility.KeyboardHelper import KeyboardHelper

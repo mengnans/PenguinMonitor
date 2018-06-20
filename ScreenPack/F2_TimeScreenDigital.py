@@ -4,7 +4,7 @@ import pygame
 from ScreenPack.IScreen import IScreen
 
 
-class TimeScreen(IScreen):
+class TimeScreenDigital(IScreen):
     # <editor-fold desc="Declaration and Initial / Constructor">
 
     def __init__(self):

@@ -1,5 +1,7 @@
 import os
 
+import pygame
+
 from DataPack.DataProgram import DataProgram
 from ScreenPack.IScreen import IScreen
 

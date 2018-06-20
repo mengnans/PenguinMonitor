@@ -1,10 +1,6 @@
 import time
 import pygame
 
-from DataPack.DataProgram import DataProgram
-from DataPack.Decorator import OnDebug
-
-
 class FpsDisplayItem:
 
     def __init__(self):

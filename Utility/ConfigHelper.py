@@ -1,6 +1,6 @@
 import json
 
-from DataPack.Court import Court
+from Entity.Court import Court
 
 
 class ConfigHelper:
